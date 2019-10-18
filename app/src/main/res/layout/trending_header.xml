@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="0.9"
+            android:layout_height="50dp">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/headingcolor"
+                android:textStyle="bold"
+                android:textSize="@dimen/normal_text_size_for_sub_header"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/s_margin_value"
+                android:text="Trending" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/small_text_size_for_sub_header"
+                android:layout_marginLeft="@dimen/large_big_margin_value"
+                android:layout_gravity="center_vertical"
+                android:text="Live"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="#00aaee"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/normal_text_size_for_sub_header"
+                    android:layout_gravity="center"
+                    android:text="V-Corner"
+                    android:id="@+id/tvVcorner"
+                    />
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/moretrend"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/large_big_margin_value"
+            android:layout_marginRight="@dimen/normal_margin_value"
+            android:layout_gravity="center_vertical"
+            android:text="More"
+                android:visibility="gone"/>
+
+            <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:gravity="center_vertical"
+            android:layout_marginRight="@dimen/normal_margin_value"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/right_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="75dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/normal_margin_value"
+        android:layout_marginTop="@dimen/small_margin_value"
+        android:background="@color/titlecolor" />
+
+</LinearLayout>

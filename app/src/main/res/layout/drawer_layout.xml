@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--app:labelVisibilityMode="labeled"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--app:menu="@menu/bottom_navigation"/>-->
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header_layout" />
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linear"
+                android:layout_marginTop="@dimen/small_margin_value"
+                android:layout_marginBottom="80dp">
+
+                <LinearLayout
+                    android:id="@+id/linear1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/scrollView"
+                    android:layout_marginTop="@dimen/normal_margin_value8"
+                    android:layout_marginBottom="@dimen/big_margin_value"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_below="@id/linear1"
+                        android:layout_marginLeft="@dimen/small_margin_value"
+                        android:layout_marginRight="@dimen/small_margin_value"
+                        android:background="@drawable/round_corner"
+                        android:elevation="9dp">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <android.support.design.widget.TabLayout
+                            android:id="@+id/tabDots"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            app:tabBackground="@drawable/tab_selector"
+                            app:tabGravity="center"
+                            app:tabIndicatorHeight="0dp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/normal_margin_value10"
+                        android:layout_marginTop="@dimen/large_big_margin_value"
+                        android:layout_marginRight="@dimen/normal_margin_value10"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/nDottedLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="1.4dp"
+                            android:background="@drawable/dotted"
+                            android:layerType="software" />
+                    </LinearLayout>
+
+                    <include
+                        android:id="@+id/trending_header_layout"
+                        layout="@layout/trending_headers"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pager"
+                        android:layout_marginTop="5dp"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/trending_header_layout"
+                        android:scrollbars="vertical"
+                        android:splitMotionEvents="false"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/normal_margin_value10"
+                        android:layout_marginTop="@dimen/normal_margin_value10"
+                        android:layout_marginRight="@dimen/normal_margin_value10"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/vDottedLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="1.4dp"
+                            android:background="@drawable/dotted"
+                            android:layerType="software" />
+                    </LinearLayout>
+
+                    <include
+                        android:id="@+id/genre_header_layout"
+                        layout="@layout/genre_header"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/recycler_view"
+                        android:visibility="gone" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/genre_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/genre_header_layout"
+                        android:scrollbars="vertical"
+                        android:splitMotionEvents="false"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/normal_margin_value10"
+                        android:layout_marginTop="@dimen/normal_margin_value10"
+                        android:layout_marginRight="@dimen/normal_margin_value10"
+                        android:gravity="center_horizontal"
+                        android:visibility="gone">
+
+                        <View
+                            android:id="@+id/DottedLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="1.4dp"
+                            android:background="@drawable/dotted"
+                            android:layerType="software" />
+                    </LinearLayout>
+
+                    <include
+                        android:id="@+id/top_header_layout"
+                        layout="@layout/top_genre_header"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/genre_recycler_view" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/comedy_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/comedy_header_layout"
+                        android:layout_marginBottom="100dp"
+                        android:scrollbars="vertical"
+                        android:splitMotionEvents="false"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/miniPlayerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:background="@color/dark_gray"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/imgSong"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="close"
+            android:src="@drawable/ic_action_name" />
+
+        <ImageView
+            android:id="@+id/imgMiniPlay"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgClose"
+            android:layout_toLeftOf="@+id/imgClose"
+            android:contentDescription="play"
+            android:src="@drawable/ic_play" />
+        <TextView
+            android:layout_marginBottom="1dp"
+            android:id="@+id/txtSongName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text=""
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/txtSongName"
+            android:id="@+id/typeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:visibility="gone"
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"/>
+
+        <TextView
+            android:layout_below="@+id/typeName"
+            android:id="@+id/txtAuthorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:padding="1dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_text_size" />
+
+
+    </RelativeLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+       />
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminateTint="@color/blue"/>
+
+</RelativeLayout>

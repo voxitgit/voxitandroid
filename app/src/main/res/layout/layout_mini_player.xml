@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/miniPlayerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/dark_gray"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/imgSong"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="close"
+            android:src="@drawable/ic_action_name" />
+
+        <ImageView
+            android:id="@+id/imgMiniPlay"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgClose"
+            android:layout_toLeftOf="@+id/imgClose"
+            android:contentDescription="play"
+            android:src="@drawable/ic_play" />
+        <TextView
+            android:layout_marginBottom="1dp"
+            android:id="@+id/txtSongName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text=""
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/txtSongName"
+            android:id="@+id/typeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:visibility="gone"
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"/>
+
+        <TextView
+            android:layout_below="@+id/typeName"
+            android:id="@+id/txtAuthorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:padding="1dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_text_size" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.NotificationActivity"
+    android:orientation="vertical">
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/search_header" />
+
+    <LinearLayout
+        android:id="@+id/text_noti"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/normal_margin_value10"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No New Notification"
+            android:textSize="@dimen/big_margin_value"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginTop="100dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_layout">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/notifi_item"
+                        android:layout_marginBottom="50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/big_margin_value"
+        app:menu="@menu/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+        />
+    <RelativeLayout
+        android:id="@+id/miniPlayerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@+id/bottom_navigation"
+        android:background="@color/dark_gray"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/imgSong"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="35dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="close"
+            android:src="@drawable/ic_action_name" />
+
+        <ImageView
+            android:id="@+id/imgMiniPlay"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgClose"
+            android:layout_toLeftOf="@+id/imgClose"
+            android:contentDescription="play"
+            android:src="@drawable/ic_play" />
+        <TextView
+            android:layout_marginBottom="1dp"
+            android:id="@+id/txtSongName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text=""
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/txtSongName"
+            android:id="@+id/typeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:visibility="gone"
+            android:padding="2dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/filter_txt_size"/>
+
+        <TextView
+            android:layout_below="@+id/typeName"
+            android:id="@+id/txtAuthorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/imgMiniPlay"
+            android:layout_toLeftOf="@+id/imgMiniPlay"
+            android:layout_toEndOf="@+id/imgSong"
+            android:layout_toRightOf="@+id/imgSong"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:padding="1dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_text_size" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

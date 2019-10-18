@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Voxit</string>
+    <string name="facebook_app_id">2323338564599670</string>
+    <string name="fb_login_protocol_scheme">fb2323338564599670</string>
+
+    <string name="email">E-mail / Phone no</string>
+    <string name="password">Password</string>
+    <string name="confirm_pwd">Confirm password</string>
+    <string name="repassword">Re-enter Password</string>
+    <string name="referal_code">Referal Code</string>
+    <string name="login_btn">Log in</string>
+    <string name="forgot">Forgot password ?</string>
+    <string name="create_acc">Create your voxit account</string>
+    <string name="login_social">Login with social media</string>
+    <string name="description">Voxit</string>
+
+
+    <string name="sign_up">Sign up</string>
+    <string name="send">Send</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="age">Age</string>
+    <string name="e_mail">E-mail</string>
+    <string name="phone_no">Phone number</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="otp">OTP</string>
+    <string name="enter_pw_title">Enter Password</string>
+    <string name="fb_email">E-mail</string>
+    <string name="fb_pw">Password</string>
+    <string name="fb_confirm_pw">Confirm Password</string>
+    <string name="submit">Submit</string>
+
+    <string name="home">Home</string>
+    <string name="notification">Notifications</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="account">Account</string>
+    <string name="language_title">Language</string>
+    <string name="genre_title">Genres</string>
+    <string name="report_abuse">Report Abuse</string>
+    <string name="please_wait">Please Wait</string>
+
+    <string name="err_msg_first_name">Name is required</string>
+    <string name="err_msg_referral_code">Referral Code is required</string>
+    <string name="err_msg_type_of_issues">Select Type Of Issues</string>
+    <string name="err_msg_referral_wrong">Invalid Referral Code</string>
+    <string name="err_msg_e_mail_worng">Please enter correct E_mail address</string>
+    <string name="err_msg_e_mail">E-mail is required</string>
+    <string name="err_msg_phone_number">Phone number is required</string>
+    <string name="err_msg_phone_number_worng">Must be a 10 digit number</string>
+    <string name="err_msg_phone_number_no_worng">Must be a 10 digit number</string>
+    <string name="err_msg_otp">OTP is required</string>
+    <string name="err_msg_otp_mismatch">OTP mismatch</string>
+    <string name="err_msg_Password">Password is required</string>
+    <string name="err_msg_Password_length">Password length maximum 8 character</string>
+    <string name="err_msg_Re_enter_password">Re_enter Password is required</string>
+    <string name="err_msg_confirm_password">Confirm Password is required</string>
+    <string name="err_msg_confirm_password_worng">Password and Confirm Password does not match </string>
+    <string name="err_msg_Re_enter_password_worng">Password and Re_enter Password does not match </string>
+    <string name="err_msg_chk_worng">Agree the terms and conditions</string>
+    <string name="otp_msg">OTP Generation successful. Please check your Email or Phone no for the OTP.</string>
+    <string name="forget_alert">Please enter your Email / Phone number to proceed further.</string>
+    <string name="forgot_otp_msg">Forgot password request successful. Please check your Email to proceed further. </string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+</resources>

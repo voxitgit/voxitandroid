@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mbig_margin_value1"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/logo"
+            android:layout_marginLeft="@dimen/normal_margin_value10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/large_big_margin_value"
+            android:text="@string/language_title"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="@dimen/normal_margin_value10"
+        android:layout_marginRight="@dimen/normal_margin_value10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_big_margin_value"
+        android:gravity="center_horizontal">
+    <View
+        android:id="@+id/vDottedLine"
+        android:background="@drawable/dotted"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/normal_margin_value10"
+        android:layout_height="1.4dp"
+        android:layerType="software" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:scrollbars="vertical"
+        android:layout_marginTop="@dimen/large_big_margin_value"
+        android:layout_marginLeft="@dimen/very_small_margin_value"
+        android:layout_marginRight="@dimen/very_small_margin_value"
+        android:layout_below="@+id/genre_header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

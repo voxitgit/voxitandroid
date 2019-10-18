@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/search_header" />
+    <LinearLayout
+        android:layout_below="@+id/header_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_marginBottom="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_marginBottom="@dimen/normal_margin_value10"
+        android:id="@+id/linearLt"
+        android:background="@drawable/samp"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_below="@+id/linearLt"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="130dp"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        app:cardUseCompatPadding="true"
+        android:layout_width="330dp"
+        android:layout_height="130dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginLeft="@dimen/medium_margin_value"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/medium_margin_value"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/pointsImg"
+                        android:layout_width="@dimen/listview_height"
+                        android:layout_height="@dimen/listview_height"
+                        android:src="@drawable/logo"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="13dp"
+                    android:background="@color/black"/>
+                <LinearLayout
+                    android:layout_marginTop="@dimen/normal_text_size16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:orientation="vertical"
+                        android:background="@color/white">
+                        <TextView
+                            android:id="@+id/total_ref"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total Referral Points"
+                            android:textSize="@dimen/large_big_margin_value"
+                            android:textColor="@color/black"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/normal_text_size"
+                            android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/points_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/mbig_margin_value"
+                            android:textColor="@color/blue"
+                            />
+                            <TextView
+                            android:id="@+id/points"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Points Earned"
+                            android:layout_marginLeft="@dimen/small_margin_value"
+                            android:layout_marginTop="@dimen/small_margin_value"
+                            android:textSize="@dimen/normal_text_size16"
+                            android:textColor="@color/black"
+                            />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_below="@+id/linear"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/normal_text_size16"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/minimum_points"
+            android:gravity="center"
+            android:text="Minimum Points to Redeem is: 100. Redeem option will be available when you reach 100 points"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/medium_text_size"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/linear1"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/header_height"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/redeemBtn"
+            android:gravity="center"
+            android:text="Redeem"
+            android:layout_width="match_parent"
+            android:background="@color/blue"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="@dimen/medium_margin_value1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/big_margin_value"
+        app:menu="@menu/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+        />
+</RelativeLayout>

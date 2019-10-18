@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+            <item
+                android:id="@+id/report_abuse"
+                android:icon="@drawable/like"
+                android:title="Report abuse"/>
+
+            <item
+                android:id="@+id/add_playlist"
+                android:icon="@drawable/add"
+                android:title="Add to playlist"/>
+
+            <item
+                android:id="@+id/go_to_publish"
+                android:icon="@drawable/back_menu_icon"
+                android:title="Go to publisher"/>
+    <!--<item-->
+        <!--android:id="@+id/received_requests"-->
+        <!--app:showAsAction="always"-->
+        <!--app:actionLayout="@layout/custom_menu_layout"-->
+        <!--android:title="Requests"/>-->
+
+</menu>

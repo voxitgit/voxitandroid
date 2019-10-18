@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/vcorner_bg">
+
+
+           <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/rounded_corner_layout"
+            android:padding="20dp"
+            android:layout_marginTop="20dp">
+
+
+               <ImageView
+                   android:layout_gravity="center"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:background="@drawable/warning_btn"
+                   android:layout_marginTop="25dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#707070"
+                   android:text="Error"
+                   android:fontFamily="@font/poppins_bold"
+                   android:textSize="30sp"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="40dp"/>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="#707070"
+                   android:text="Something went to wrong"
+                   android:textSize="20sp"
+                   android:fontFamily="@font/poppins_regular"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="30dp"/>
+
+
+               <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/dialogImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tryagain_btn"
+                    android:layout_marginTop="45dp"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/popup">
+
+        <TextView
+            android:text="Update Your App For New Features"
+            android:id="@+id/msgTv"
+            android:padding="2dip"
+            android:textSize="16sp"
+            android:layout_margin="18dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="Update"
+            android:layout_marginBottom="@dimen/large_big_margin_value"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_rect"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+</LinearLayout>

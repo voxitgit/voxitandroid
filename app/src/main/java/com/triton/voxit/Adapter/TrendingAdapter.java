@@ -1,0 +1,101 @@
+package com.triton.voxit.Adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.triton.voxit.R;
+import com.triton.voxit.model.Trending;
+import com.triton.voxit.model.RecyclerViewItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.ViewHolder>{
+
+    ArrayList<String> urls;
+    List<RecyclerViewItem> ImgUrl;
+    Context context;
+
+    //constructor
+    public TrendingAdapter(List<RecyclerViewItem> ImgUrl, Context context)
+    {
+        this.ImgUrl = ImgUrl;
+        this.context = context;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder
+    {
+        private ImageView image;
+        private TextView tv_title;
+        private TextView tv_des;
+
+        public ViewHolder(View view)
+        {
+            super(view);
+            image =(ImageView)view.findViewById(R.id.itemImage);
+            tv_title = (TextView) view.findViewById(R.id.tvTitle);
+            tv_des = (TextView) view.findViewById(R.id.tvDes);
+
+        }
+
+        public ImageView getImage(){ return this.image;}
+    }
+
+    @Override
+    public TrendingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_single_card, parent, false);
+        // v.setLayoutParams(new RecyclerView.LayoutParams(250,250));
+        // v.setLayoutParams(new RecyclerView.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        return new TrendingAdapter.ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(final TrendingAdapter.ViewHolder holder, int position)
+    {
+        RecyclerViewItem recyclerViewItem = ImgUrl.get(position);
+        Trending trending = (Trending) recyclerViewItem;
+        holder.tv_title.setText(trending.getTitle());
+        holder.tv_des.setText(trending.getDescription());
+
+        Glide.with(this.context)
+                .load(trending.getImageUrl())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.image);
+    }
+
+    @Override
+    public int getItemCount()
+    {
+//        Log.e("getItemCount", String.valueOf(getItemCount()));
+//        if(getItemCount()==1){
+//
+//        }
+
+        return ImgUrl.size();
+    }
+    @Override
+    public int getItemViewType(int position) {
+        Log.e("List", String.valueOf(ImgUrl.get(position)));
+        if (position == 0) {
+            Log.e("position", String.valueOf(position));
+            return 0;
+        } else if(position ==1) {
+            Log.e("position1", String.valueOf(position));
+            return 1;
+        } else {
+            return 2;
+        }
+
+    }
+}
+
+

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.HelpSupport"
+    android:orientation="vertical">
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/search_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text"
+                        android:layout_marginBottom="@dimen/normal_margin_value10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/normal_text_size"
+                        android:text="Select Type of Issue"/>
+
+                    <RelativeLayout
+                        android:id="@+id/spnn"
+                    android:layout_marginBottom="@dimen/normal_margin_value10"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/help_round"
+                    android:orientation="horizontal"
+                        android:visibility="gone">
+                    <Spinner
+                        android:id="@+id/type_of_issues"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    >
+                    </Spinner>
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:textSize="@dimen/normal_text_size"
+                        android:padding="12dp"
+                        android:background="@drawable/help_round"/>
+
+                    <EditText
+                        android:id="@+id/email_help"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/normal_text_size"
+                        android:hint="E-mail"
+                        android:padding="12dp"
+                        android:background="@drawable/help_round"/>
+
+                    <EditText
+                        android:id="@+id/mobile_help"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Phone No"
+                        android:textSize="@dimen/normal_text_size"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="12dp"
+                        android:background="@drawable/help_round"/>
+
+                    <!--<EditText-->
+                        <!--android:id="@+id/issue"-->
+                        <!--android:layout_marginTop="15dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:hint="Describe your issue..!"-->
+                        <!--android:padding="35dp"-->
+                        <!--android:inputType="textCapSentences|textMultiLine"-->
+                        <!--android:maxLines="14"-->
+                        <!--android:gravity="start"-->
+                        <!--android:scrollHorizontally="false"-->
+                        <!--android:background="@drawable/help_round"/>-->
+                    <EditText android:id="@+id/issue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="5"
+                        android:layout_marginTop="15dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="top|left"
+                        android:textSize="@dimen/normal_text_size"
+                        android:hint="Describe your issue..!"
+                        android:inputType="textMultiLine"
+                        android:scrollHorizontally="false"
+                        android:minWidth="20.0dip"
+                        android:textColor="@color/black"
+                        android:background="@drawable/help_round"
+                        android:padding="12dp"
+                        android:maxWidth="180dip" />
+
+                    <TextView
+                        android:id="@+id/submit"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:text="Submit"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/help_submit"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:id="@+id/textd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:padding="5dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvbacktohome"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:text="Back To Home"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/help_submit"
+            android:drawableLeft="@drawable/drawable_left_home"
+            android:gravity="center_vertical"
+            android:padding="10dp" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

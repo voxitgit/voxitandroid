@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1033975466085",
+    "firebase_url": "https://voxitapplicationandroid-ee557.firebaseio.com",
+    "project_id": "voxitapplicationandroid-ee557",
+    "storage_bucket": "voxitapplicationandroid-ee557.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033975466085:android:a2d7756e7ecf7587669e8c",
+        "android_client_info": {
+          "package_name": "com.triton.voxit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033975466085-88abd7ln9hqaid4tb3u11t2afe9m7nc8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.triton.voxit",
+            "certificate_hash": "c7b13d3f636ee812459e518059d951000d701abc"
+          }
+        },
+        {
+          "client_id": "1033975466085-kbfjvce59rpqaqtd47m7agelr1ihui02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe8qnxZtRHUgDxion7QnSH8NDzpm3W_Zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033975466085-kbfjvce59rpqaqtd47m7agelr1ihui02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

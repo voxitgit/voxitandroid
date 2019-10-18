@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/return_2"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/logo"
+            android:layout_marginLeft="15dp"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/big_margin_value"
+            android:text="@string/sign_up"/>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_marginLeft="@dimen/normal_margin_value10"-->
+        <!--android:layout_marginRight="@dimen/normal_margin_value10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <View
+            android:background="@drawable/dotted"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/normal_margin_value10"
+            android:layout_height="1.4dp"/>
+    <!--</LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/first_name_layout"-->
+        <!--android:layout_marginTop="@dimen/normal_margin_value10"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true"-->
+        <!--app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"-->
+        <!--android:layout_height="wrap_content"-->
+       <!--&gt;-->
+
+            <EditText
+                android:id="@+id/first_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:hint="@string/first_name"
+                android:textColorHint="@color/dark_gray"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/email_edit"
+                android:inputType="text"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold" />
+
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/last_name_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:visibility="gone"-->
+        <!--android:focusableInTouchMode="true">-->
+
+            <EditText
+                android:id="@+id/last_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:hint="@string/last_name"
+                android:visibility="gone"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:nextFocusForward="@+id/age_edit"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold"
+               />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/age_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:visibility="gone"-->
+        <!--android:focusableInTouchMode="true">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/rect_cir"-->
+            <!--android:clickable="true"-->
+            <!--android:focusable="true"-->
+            <!--android:focusableInTouchMode="true"-->
+            <!--android:gravity="left"-->
+            <!--android:padding="@dimen/big_normal_Padding_value">-->
+
+            <EditText
+                android:id="@+id/age_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:hint="@string/age"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_gray"
+                android:cursorVisible="true"
+                android:inputType="number"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        <!--</RelativeLayout>-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/gender_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="1"
+                        android:background="@drawable/rect_cir"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left"
+                        android:padding="10dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cb_M"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:text="Male"
+                            app:buttonTint="@color/checkbox_filter_tint"
+                            android:textColor="@color/dark_gray"
+                            android:textColorHint="@color/dark_gray"
+                            android:textSize="@dimen/normal_text_size"
+                            android:textStyle="normal"/>
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cb_F"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Female"
+                            app:buttonTint="@color/checkbox_filter_tint"
+                            android:layout_weight="0.35"
+                            android:textColor="@color/dark_gray"
+                            android:textColorHint="@color/dark_gray"
+                            android:textCursorDrawable="@color/blue"
+                            android:textSize="@dimen/normal_text_size"
+                            android:textStyle="normal"/>
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/cb_O"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Others"
+                            app:buttonTint="@color/checkbox_filter_tint"
+                            android:layout_weight="0.35"
+                            android:textColor="@color/dark_gray"
+                            android:textColorHint="@color/dark_gray"
+                            android:textCursorDrawable="@color/blue"
+                            android:textSize="@dimen/normal_text_size"
+                            android:textStyle="normal"/>
+
+                    </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/email_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true">-->
+
+            <EditText
+                android:id="@+id/email_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:hint="@string/e_mail"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:nextFocusForward="@+id/phome_no_edit"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_gray"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="normal" />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/phone_no_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true">-->
+
+
+            <EditText
+                android:id="@+id/phome_no_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:hint="@string/phone_no"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:maxLength="10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@+id/otp_edit"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_gray"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold" />
+
+
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+                <!--<android.support.design.widget.TextInputLayout-->
+
+                    <!--android:id="@+id/country_layout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="@dimen/normal_margin_value10"-->
+                    <!--android:clickable="true"-->
+                    <!--android:focusable="true"-->
+                    <!--android:focusableInTouchMode="true">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@drawable/rect_cir"-->
+                        <!--android:clickable="true"-->
+                        <!--android:focusable="true"-->
+                        <!--android:focusableInTouchMode="true"-->
+                        <!--android:gravity="left"-->
+                        <!--android:padding="@dimen/big_normal_Padding_value">-->
+
+                        <EditText
+                            android:id="@+id/country_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:cursorVisible="true"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:background="@drawable/rect_cir"
+                            android:layout_margin="@dimen/normal_margin_value10"
+                            android:padding="@dimen/big_normal_Padding_value"
+                            android:gravity="left"
+                            android:hint="@string/country"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/dark_gray"
+                            android:textSize="@dimen/small_text_size"
+                            android:textStyle="bold"
+                            android:visibility="gone"/>
+
+
+
+                    <!--</RelativeLayout>-->
+                <!--</android.support.design.widget.TextInputLayout>-->
+                <!--<android.support.design.widget.TextInputLayout-->
+
+                    <!--android:id="@+id/state_layout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="@dimen/normal_margin_value10"-->
+                    <!--android:clickable="true"-->
+                    <!--android:focusable="true"-->
+                    <!--android:focusableInTouchMode="true">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@drawable/rect_cir"-->
+                        <!--android:clickable="true"-->
+                        <!--android:focusable="true"-->
+                        <!--android:focusableInTouchMode="true"-->
+                        <!--android:gravity="left"-->
+                        <!--android:padding="@dimen/big_normal_Padding_value">-->
+
+                        <EditText
+                            android:id="@+id/state_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:cursorVisible="true"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:background="@drawable/rect_cir"
+                            android:layout_margin="@dimen/normal_margin_value10"
+                            android:padding="@dimen/big_normal_Padding_value"
+                            android:gravity="left"
+                            android:hint="@string/state"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/dark_gray"
+                            android:textSize="@dimen/small_text_size"
+                            android:textStyle="bold"
+                            android:visibility="gone"/>
+
+
+
+                    <!--</RelativeLayout>-->
+                <!--</android.support.design.widget.TextInputLayout>-->
+                <!--<android.support.design.widget.TextInputLayout-->
+
+                    <!--android:id="@+id/city_layout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="@dimen/normal_margin_value10"-->
+                    <!--android:clickable="true"-->
+                    <!--android:focusable="true"-->
+                    <!--android:focusableInTouchMode="true">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:background="@drawable/rect_cir"-->
+                        <!--android:clickable="true"-->
+                        <!--android:focusable="true"-->
+                        <!--android:focusableInTouchMode="true"-->
+                        <!--android:gravity="left"-->
+                        <!--android:padding="@dimen/big_normal_Padding_value">-->
+
+                        <EditText
+                            android:id="@+id/city_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:cursorVisible="true"
+                            android:textCursorDrawable="@drawable/color_cursor"
+                            android:background="@drawable/rect_cir"
+                            android:layout_margin="@dimen/normal_margin_value10"
+                            android:padding="@dimen/big_normal_Padding_value"
+                            android:gravity="left"
+                            android:hint="@string/city"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/dark_gray"
+                            android:textSize="@dimen/small_text_size"
+                            android:textStyle="bold"
+                            android:visibility="gone"/>
+
+
+
+                    <!--</RelativeLayout>-->
+                <!--</android.support.design.widget.TextInputLayout>-->
+
+    <LinearLayout
+        android:id="@+id/send_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/normal_margin_value10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sendtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/normal_text_size" />
+
+    </LinearLayout>
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/otp_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true">-->
+
+            <EditText
+                android:id="@+id/otp_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@drawable/rect_cir"
+                android:layout_margin="@dimen/normal_margin_value10"
+                android:padding="@dimen/big_normal_Padding_value"
+                android:gravity="left"
+                android:hint="@string/otp"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:nextFocusForward="@+id/etPassword"
+                android:textColor="@color/black"
+                android:textColorHint="@color/dark_gray"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="bold" />
+
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:id="@+id/text_input_layout_password"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColorHint="@color/dark_gray"-->
+                    <!--app:passwordToggleEnabled="true"-->
+                    <!--app:passwordToggleTint="@color/dark_gray"-->
+                    <!--app:hintEnabled="false"-->
+                    <!--&gt;-->
+
+                    <EditText
+                        android:id="@+id/etPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:background="@drawable/rect_cir"
+                        android:layout_margin="@dimen/normal_margin_value10"
+                        android:padding="@dimen/big_normal_Padding_value"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:nextFocusForward="@+id/etRenterPassword"
+                        android:hint="@string/password"
+                        android:textColorHint="@color/dark_gray"
+                        android:textSize="@dimen/small_text_size"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+                <!--</android.support.design.widget.TextInputLayout>-->
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                    <!--android:id="@+id/re_enter_layout_password"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColorHint="@color/dark_gray"-->
+                    <!--app:passwordToggleEnabled="true"-->
+                    <!--app:passwordToggleTint="@color/dark_gray"-->
+                    <!--app:hintEnabled="false"-->
+                    <!--&gt;-->
+
+                    <EditText
+                        android:id="@+id/etRenterPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:background="@drawable/rect_cir"
+                        android:layout_margin="@dimen/normal_margin_value10"
+                        android:padding="@dimen/big_normal_Padding_value"
+                        android:hint="@string/repassword"
+                        android:textColorHint="@color/dark_gray"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/small_text_size"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+                <!--</android.support.design.widget.TextInputLayout>-->
+                <EditText
+                    android:id="@+id/referal_codeEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:background="@drawable/rect_cir"
+                    android:layout_margin="@dimen/normal_margin_value10"
+                    android:padding="@dimen/big_normal_Padding_value"
+                    android:hint="@string/referal_code"
+                    android:textColorHint="@color/dark_gray"
+                    android:inputType="text"
+                    android:textSize="@dimen/small_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/normal_margin_value10"
+                    android:orientation="horizontal">
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/validate_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    app:buttonTint="@color/checkbox_filter_tint" />
+
+                    <TextView
+                        android:id="@+id/checktext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:text="http://voxitworld.com/privacypolicy.html"
+                        android:linksClickable="true"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:id="@+id/helpTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unable to create an account?"
+                        android:layout_alignParentRight="true"
+                        android:textSize="13dp"
+                        android:textColor="@color/red"/>
+                </RelativeLayout>
+
+    <Button
+        android:id="@+id/login_btn"
+        android:background="@drawable/rounded_shape"
+        android:text="@string/sign_up"
+        android:textStyle="bold"
+        android:textSize="@dimen/small_text_size_for_header"
+        android:textAllCaps="false"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/height"
+        android:layout_marginBottom="@dimen/medium_margin_value"
+        android:layout_marginLeft="@dimen/normal_margin_value10"
+        android:layout_marginRight="@dimen/normal_margin_value10"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

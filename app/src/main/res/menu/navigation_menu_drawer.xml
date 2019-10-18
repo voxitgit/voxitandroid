@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_item_one"
+        android:icon="@drawable/my_rewards"
+        android:title="My Rewards" />
+    <item android:id="@+id/nav_item_two"
+        android:icon="@drawable/referral"
+        android:title="Referrals" />
+    <item android:id="@+id/nav_item_three"
+        android:icon="@drawable/help_support"
+        android:title="Help and Support" />
+    <item android:id="@+id/nav_item_four"
+        android:icon="@drawable/profile_menu"
+        android:title="Profile" />
+    <item android:id="@+id/nav_item_seven"
+        android:icon="@drawable/mic_icon"
+        android:title="Become a Voxit Jockey" />
+    <group android:id="@+id/group_menu">
+        <item android:id="@+id/nav_item_five"
+            android:icon="@drawable/about_us"
+            android:title="About Voxit" />
+        <item android:id="@+id/nav_item_six"
+            android:icon="@drawable/terms_condt"
+            android:title="Terms and conditions" />
+        <!--<item android:id="@+id/nav_item_three"-->
+            <!--android:icon="@drawable/logo"-->
+            <!--android:title="Item 3" />-->
+    </group>
+
+    <!--<group android:id="@+id/group_menu">-->
+        <!--<item android:id="@+id/nav_item_four"-->
+            <!--android:title="Item 4" />-->
+        <!--<item android:id="@+id/nav_item_five"-->
+            <!--android:title="Item 5" />-->
+    <!--</group>-->
+
+    <!--<item android:title="Settings">-->
+        <!--<menu>-->
+            <!--<item android:id="@+id/nav_item_five"-->
+                <!--android:icon="@drawable/about_us"-->
+                <!--android:title="About Voxit" />-->
+            <!--<item android:id="@+id/nav_item_six"-->
+                <!--android:icon="@drawable/terms_condt"-->
+                <!--android:title="Terms and conditions" />-->
+        <!--</menu>-->
+    <!--</item>-->
+</menu>

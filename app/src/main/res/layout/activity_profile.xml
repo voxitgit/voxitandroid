@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ProfileActivity">
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/search_header" />
+    <LinearLayout
+        android:layout_below="@+id/header_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_marginBottom="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:background="@color/blue"
+                    android:id="@+id/linear"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <RelativeLayout
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/profile_layout">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/itemImage"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/user" />
+
+                        <ImageView
+                            android:id="@+id/editTv"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/baseline_camera_enhance_white_18dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"/>
+
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLt"
+                    android:layout_below="@+id/linear"
+                    android:layout_marginTop="@dimen/mbig_margin_value"
+                    android:layout_marginBottom="@dimen/large_big_margin_value"
+                    android:layout_marginLeft="@dimen/large_big_margin_value"
+                    android:layout_marginRight="@dimen/large_big_margin_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/linear1"
+                        android:layout_marginTop="@dimen/normal_margin_value10"
+                        android:layout_marginLeft="@dimen/large_big_margin_value"
+                        android:layout_marginRight="@dimen/large_big_margin_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.2"
+                            android:text="Name" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.9"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:text="NAME" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linear2"
+                        android:layout_below="@+id/linear1"
+                        android:layout_marginLeft="@dimen/large_big_margin_value"
+                        android:layout_marginRight="@dimen/large_big_margin_value"
+                        android:layout_marginTop="@dimen/normal_margin_value10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.2"
+                            android:text="Email" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.9"
+                            android:text=":" />
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:text="NAME" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linear3"
+                        android:layout_below="@+id/linear2"
+                        android:layout_marginLeft="@dimen/large_big_margin_value"
+                        android:layout_marginRight="@dimen/large_big_margin_value"
+                        android:layout_marginTop="@dimen/normal_margin_value10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:id="@+id/name1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.2"
+                            android:text="Phone Number" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.9"
+                            android:text=":" />
+
+                        <TextView
+                            android:textColor="@color/black"
+                            android:id="@+id/phone_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:text="NAME" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/linearLt1"
+                    android:layout_below="@+id/linearLt"
+                    android:layout_marginTop="@dimen/mbig_margin_value"
+                    android:layout_marginBottom="@dimen/medium_margin_value1"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/my_rewards"
+                        android:layout_marginRight="@dimen/normal_margin_value10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/normal_margin_value10"
+                        android:paddingRight="@dimen/normal_margin_value10"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:text="My Rewards"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/roundcorner"
+                        android:textColor="#fff"/>
+                    <Button
+                        android:layout_marginLeft="@dimen/normal_margin_value10"
+                        android:id="@+id/referral_code"
+                        android:layout_gravity="center"
+                        android:paddingLeft="@dimen/normal_margin_value10"
+                        android:paddingRight="@dimen/normal_margin_value10"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:text="Referrals"
+                        android:textAllCaps="false"
+                        android:background="@drawable/roundcorner"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLt2"
+                    android:layout_below="@+id/linearLt1"
+                    android:layout_marginTop="@dimen/medium_margin_value1"
+                    android:layout_marginBottom="@dimen/large_big_margin_value"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/reset"
+                        android:layout_marginRight="@dimen/normal_margin_value10"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:text="Reset Password"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:background="@drawable/buttonshape"
+                        android:textColor="#fff"/>
+                    <Button
+                        android:layout_marginLeft="@dimen/normal_margin_value10"
+                        android:id="@+id/logout" android:elevation="@dimen/very_small_margin_value"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:text="Sign out"
+                        android:textAllCaps="false"
+                        android:background="@drawable/buttonshape"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/big_margin_value"
+        app:menu="@menu/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+        />
+
+</RelativeLayout>

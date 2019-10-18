@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include
+        android:visibility="gone"
+        android:id="@+id/header_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/search_header" />
+    <LinearLayout
+        android:id="@+id/search_layout"
+        android:layout_below="@+id/header_layout"
+        android:background="@drawable/rect_cir"
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/big_margin_value"
+        android:layout_marginLeft="@dimen/big_margin_value"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/search_et"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@null"
+            android:inputType="text"
+            android:drawableRight="@drawable/search_icon" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/search_layout"
+        android:layout_marginRight="@dimen/big_margin_value"
+        android:layout_marginLeft="@dimen/big_margin_value"
+        android:layout_marginBottom="@dimen/mbig_margin_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/big_margin_value"
+        app:menu="@menu/bottom_navigation"
+        app:itemBackground="@color/white"
+        app:labelVisibilityMode="labeled"
+        />
+</RelativeLayout>

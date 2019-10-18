@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="left"
+            android:background="@drawable/ic_right"
+            android:orientation="horizontal"
+            >
+
+
+            <ImageView
+                android:id="@+id/tvHeaderIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingTop="@dimen/nav_header_vertical_spacing"
+                android:src="@drawable/drawer_icon" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvLanguage"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingTop="@dimen/nav_header_vertical_spacing"-->
+                <!--android:text="Lauguage"-->
+                <!--android:layout_marginLeft="@dimen/big_margin_value"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvgenre"-->
+                <!--android:text="genre"-->
+                <!--android:paddingTop="@dimen/nav_header_vertical_spacing"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/big_margin_value"-->
+                <!--android:layout_height="wrap_content" />-->
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+
+            >
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/forward" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/search" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/floating_menu" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

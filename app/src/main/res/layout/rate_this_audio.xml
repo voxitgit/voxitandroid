@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mbig_margin_value1"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/logo"
+            android:layout_marginLeft="@dimen/normal_margin_value10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_big_margin_value"
+            android:text="Rate this audio"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="@dimen/normal_margin_value10"
+        android:layout_marginRight="@dimen/normal_margin_value10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_big_margin_value"
+        android:gravity="center_horizontal">
+        <View
+            android:id="@+id/vDottedLine"
+            android:background="@drawable/dotted"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/normal_margin_value10"
+            android:layout_height="1.4dp"
+            android:layerType="software" />
+    </LinearLayout>
+    <com.hsalf.smilerating.SmileRating
+        android:id="@+id/ratingView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/big_margin_value"
+        app:isIndicator="false" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/big_margin_value"
+        android:layout_marginLeft="@dimen/normal_margin_value10"
+        android:layout_marginRight="@dimen/normal_margin_value10"
+        android:layout_marginBottom="@dimen/big_margin_value"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_rect"
+            android:text="Ok"
+           />
+    </LinearLayout>
+
+</LinearLayout>

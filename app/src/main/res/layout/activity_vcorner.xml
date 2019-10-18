@@ -1,0 +1,190 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.VcornerActivity"
+    android:background="@drawable/vcorner_bg">
+    <ProgressBar
+        android:id="@+id/progressBarVcorner"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/headerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivHomeQuizDashboard"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/ic_home_white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/topperformers_btn" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp">
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="120dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/ic_profile_sample"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/civsecond"/>
+                    <Button
+                        android:id="@+id/btnsecond"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/second"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentBottom="true" />
+
+
+
+
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvsecondname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dinesh"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp">
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="130dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/ic_profile_sample"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/civfirst"/>
+
+                    <Button
+                        android:id="@+id/btnfirst"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/first"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentBottom="true" />
+
+
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kumar"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/tvfirstname"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp">
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="120dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="90dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/ic_profile_sample"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/civthird"/>
+
+                    <Button
+                        android:id="@+id/btnthird"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/third"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
+                        android:layout_alignParentBottom="true" />
+
+
+
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dinesh"
+                    android:textColor="@color/black1"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/tvthirdname"/>
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_below="@+id/headerView"
+     android:layout_margin="20dp">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rvvcornerdashboard"/>
+
+  </LinearLayout>
+
+
+
+</RelativeLayout>

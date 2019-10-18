@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dp"
+    android:padding="5dp"
+    android:background="@drawable/rounded_corner_cardview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_notify"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/image_ll"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:elevation="3dp"
+        android:background="@drawable/round_corner">
+        <ImageView
+            android:id="@+id/image_noti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/notify_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textStyle="bold"
+        android:textSize="14dp"
+        android:layout_marginTop="3dp"
+        android:padding="3dp"
+        android:textColor="@color/blue"/>
+    <TextView
+        android:id="@+id/notify_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desc"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="13dp"
+        android:padding="3dp"
+        android:textColor="@color/black"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:gravity="start"
+            android:textSize="12dp"
+            android:padding="3dp"
+            />
+        <TextView
+            android:id="@+id/read"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text=""
+            android:gravity="end"
+            android:textColor="#cd4b33"
+            android:textSize="12dp"
+            android:padding="3dp"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Play"
+            android:gravity="end"
+            android:textColor="#cd4b33"
+            android:textSize="12dp"
+            android:padding="3dp"
+            android:drawableRight="@drawable/baseline_play_arrow_black_18dp"
+            />
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
