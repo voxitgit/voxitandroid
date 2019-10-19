@@ -86,7 +86,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     // ShowDialogueMethod("Alert",data.getType());
                    holder.readTV.setText("");
                    Log.i("TESTA",""+data.getType().equals("audio")+ data.getType().equals("all"));
-                   if (data.getType().equals("audio") || data.getType().equals("all")){
+                 /*  if (data.getType().equals("audio") || data.getType().equals("all")){
                         Intent intent= new Intent(mContext, AudioActivity.class);
                        intent.putExtra("jockey_id", jockeyid);
                        intent.putExtra("song", data.getAudioDetail().getAudio_path());
@@ -99,7 +99,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         intent.putExtra("type", "Notify");
                         intent .putExtra("songsList", listData);
                        mContext.startActivity(intent);
-                    }
+                    }*/
                 }
             });
 

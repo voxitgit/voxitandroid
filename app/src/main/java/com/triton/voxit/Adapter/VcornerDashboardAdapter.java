@@ -1,6 +1,7 @@
 package com.triton.voxit.Adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.triton.voxit.R;
 import com.triton.voxit.listeners.OnLoadMoreListener;
@@ -42,8 +45,10 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     private int lastVisibleItem, totalItemCount;
     VCornerQuestionsResponse.ResponseBean currentItem;
 
-    String startDate;
-    String endDate;
+    Long elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds;
+    String strMSgdaystime;
+    String strMsg;
+
 
 
     public VcornerDashboardAdapter(Context context,  List<VCornerQuestionsResponse.ResponseBean> nodesBeanList, RecyclerView inbox_list) {
@@ -64,6 +69,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
                 totalItemCount = linearLayoutManager.getItemCount();
                 lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
 
+
                 if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
                     if (mOnLoadMoreListener != null) {
                         mOnLoadMoreListener.onLoadMore();
@@ -72,6 +78,14 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
                 }
             }
         });
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                handler.postDelayed(this, 120000); //now is every 2 minutes
+                Log.i("Timer","Timer");
+            }
+        }, 120000);
     }
 
     @NonNull
@@ -88,25 +102,97 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     private void initLayoutOne(ViewHolderOne holder, int position) {
 
+
         currentItem = responseBeanList.get(position);
         for (int i = 0; i < responseBeanList.size(); i++) {
             holder.txt_eventtype.setText(currentItem.getEventType());
-            startDate = currentItem.getStartDate()+" "+currentItem.getStartTime();
-            endDate = currentItem.getEndDate()+" "+currentItem.getEndTime();
-            Log.i("STARTEND","Start"+startDate+"End"+endDate);
-            getCalculateTimes(startDate,endDate);
+            String startDate = currentItem.getStartDate()+" "+currentItem.getStartTime();
+            String endDate = currentItem.getEndDate()+" "+currentItem.getEndTime();
+            getCalculateTimes(endDate);
+
+             if(checkCurrentDateTimeAndEndDateTime(endDate)){
+                 Log.i("endDate",endDate);
+                //API CALL
+             }else if(checkStartDateIsFutureDateTime(startDate)){
+                 Log.i("startDate",startDate);
+                 Toast.makeText(context, "Selected row!"+startDate,
+                         Toast.LENGTH_LONG).show();
+                 holder.txt_endsin.setText(strMsg+" "+strMSgdaystime+" "+elapsedHours+":"+elapsedMinutes+":"+elapsedSeconds);
+
+             }
+            Log.i("STARTEND","Start"+startDate+"End"+endDate  );
+
+
+
+           /* if(0>elapsedDays){
+                strMSgdaystime = "Days "+elapsedDays;
+                holder.txt_endsin.setText("Ends in"+strMSgdaystime+" "+strMsgtime);
+            }else{
+                holder.txt_endsin.setText("Ends in"+" "+strMsgtime);
+            }
+*/
+
         }
 
 
 
     }
+    private Date getCurrentDateandTime(){
+        //Date currentdateandtime = new Date();
+        //Log.i("CurrentDateAndTime",""+currentdateandtime);
+        return  new Date();
+    }
 
-    private void getCalculateTimes(String startDate, String endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    private Boolean checkCurrentDateTimeAndEndDateTime(String endDateStr){
+        Date todayDate=getCurrentDateandTime();
+        Date endDate=convertStringToDateTimeWithAMPM(endDateStr);
+        if(todayDate.equals(endDate)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    private Boolean checkStartDateIsFutureDateTime(String dateStr){
+        Date todayDate=getCurrentDateandTime();
+        Date dateObj=convertStringToDateTimeWithAMPM(dateStr);
+
+        if(0<elapsedDays){
+             strMSgdaystime = elapsedDays+" "+"Days ";
+        }else{
+            strMSgdaystime = "";
+        }
+        if(dateObj.before(todayDate)){
+            strMsg = "Starts in :";
+            return true;
+        }else if(dateObj.after(todayDate)){
+            strMsg = "Ends in :";
+            return false;
+        }else{
+            strMsg = "Starts in :";
+            return true;
+        }
+    }
+
+    private Date convertStringToDateTimeWithAMPM(String dateStr){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
         //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
 
         try {
-            Date date1 = simpleDateFormat.parse(startDate);
+
+            Date dateObj = simpleDateFormat.parse(dateStr);
+        return  dateObj;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return  getCurrentDateandTime();
+        }
+
+    }
+    private void getCalculateTimes(String endDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+
+        try {
+            Date date1 =getCurrentDateandTime();
             Date date2 = simpleDateFormat.parse(endDate);
             calculateDuration(date1,date2);
             Log.i("STARTEND1","Start"+date1+"End"+date2);
@@ -125,20 +211,22 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
         long hoursInMilli = minutesInMilli * 60;
         long daysInMilli = hoursInMilli * 24;
 
-        long elapsedDays = different / daysInMilli;
+         elapsedDays = different / daysInMilli;
         different = different % daysInMilli;
 
-        long elapsedHours = different / hoursInMilli;
+         elapsedHours = different / hoursInMilli;
         different = different % hoursInMilli;
 
-        long elapsedMinutes = different / minutesInMilli;
+         elapsedMinutes = different / minutesInMilli;
         different = different % minutesInMilli;
 
-        long elapsedSeconds = different / secondsInMilli;
+         elapsedSeconds = different / secondsInMilli;
 
         System.out.printf(
                 "%d days, %d hours, %d minutes, %d seconds%n",
                 elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds);
+
+        Log.i("Duration","elapsedDays"+elapsedDays+"elapsedHours"+elapsedHours+"elapsedMinutes"+elapsedMinutes+"elapsedSeconds"+elapsedSeconds);
 
 
     }
@@ -158,12 +246,15 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     class ViewHolderOne extends RecyclerView.ViewHolder {
         public TextView txt_eventtype, txt_endsin;
+        public LinearLayout llroot;
 
         public ViewHolderOne(View itemView) {
             super(itemView);
 
             txt_eventtype = (TextView) itemView.findViewById(R.id.tveventtype);
             txt_endsin = (TextView) itemView.findViewById(R.id.tvendins);
+            llroot = (LinearLayout)itemView.findViewById(R.id.llrootcard);
+
 
 
 

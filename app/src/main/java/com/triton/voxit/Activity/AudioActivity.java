@@ -252,7 +252,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             }
         }
 
-        if (audiosongsNotify != null) {
+        /*if (audiosongsNotify != null) {
             audiosongsNotify = (ArrayList<NotifyDataList>) getIntent().getSerializableExtra("songsList");
              Integer audioid = Integer.valueOf(audio_id);
             for (int l = 0; l < audiosongsNotify.size(); l++) {
@@ -264,7 +264,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                     forwardMusic();
                 }
             }
-        }
+        }*/
 
 
         if (audiosongsSearchList != null) {
