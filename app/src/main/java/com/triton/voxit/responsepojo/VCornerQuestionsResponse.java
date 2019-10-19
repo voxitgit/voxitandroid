@@ -1,21 +1,40 @@
 package com.triton.voxit.responsepojo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class VCornerQuestionsResponse {
+public class VCornerQuestionsResponse implements Serializable {
 
 
     /**
      * TopThreePerformers : [{"Rank":1,"Name":"TinTin","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTL7saqA1GZ8wUb9TUTGZzPm3aGpR_hNXJOSwsGAzxjRo0a0fPL"},{"Rank":2,"Name":"Naruto","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR5xcspxX_ZZjNxKSchevclRGrXCN_GCqdqqfsAyeopSoIlf2cx"},{"Rank":3,"Name":"Ichigo","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQA1wmiaCqoHXt4stSP_CB5BOwL2FtCbPPYMJQf9OqEQ3LMdOQy"}]
-     * Response : [{"vId":1,"eventTime":"10","eventType":"Quiz","startDate":"10/18/2019","startTime":"3:47:22 AM","isClosed":false,"endDate":"10/20/2019","endTime":"3:47:22 AM","Event":[{"Qid":1,"title":"Which language is spoken in Karnataka?","options":[{"id":1,"value":"Marathi"},{"id":2,"value":"Hindi"},{"id":3,"value":"Malayalam"},{"id":4,"value":"Kannada"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":2,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":3,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":4,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":5,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"}]},{"vId":2,"eventTime":"15","eventType":"Quiz","startDate":"10/20/2019","startTime":"4:47:22 AM","isClosed":false,"endDate":"10/27/2019","endTime":"4:47:22 AM","Event":[{"Qid":8,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Yes"},{"id":2,"value":"No"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"2"},{"Qid":7,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"2"},{"Qid":6,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"2"}]}]
+     * Response : [{"vId":3,"eventTime":"10","eventType":"Quiz 1","eventName":"Diwali - 1","startDate":"18/10/2019","startTime":"5:39:17 PM","starts":"18/10/2019 5:39:17 PM","endDate":"28/10/2019","endTime":"6:39:17 PM","ends":"28/10/2019 6:39:17 PM","isClosed":false,"Event":[{"Qid":1,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"},{"Qid":2,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"},{"Qid":3,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"Yes"},{"id":2,"value":"No"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"}]},{"vId":4,"eventTime":"10","eventType":"Quiz 2","eventName":"Diwali - 2","startDate":"27/10/2019","startTime":"5:39:17 PM","starts":"27/10/2019 5:39:17 PM","endDate":"05/11/2019","endTime":"5:39:17 PM","ends":"05/11/2019 5:39:17 PM","isClosed":false,"Event":[{"Qid":4,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"Yes"},{"id":2,"value":"No"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"4"},{"Qid":5,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"4"},{"Qid":6,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"4"}]}]
      * status : Success
      * code : 200
      */
 
     private String status;
     private int code;
-    private List<TopThreePerformersBean> TopThreePerformers;
-    private List<ResponseBean> Response;
+
+    public ArrayList<TopThreePerformersBean> getTopThreePerformers() {
+        return TopThreePerformers;
+    }
+
+    public void setTopThreePerformers(ArrayList<TopThreePerformersBean> topThreePerformers) {
+        TopThreePerformers = topThreePerformers;
+    }
+
+    public ArrayList<ResponseBean> getResponse() {
+        return Response;
+    }
+
+    public void setResponse(ArrayList<ResponseBean> response) {
+        Response = response;
+    }
+
+    private ArrayList<TopThreePerformersBean> TopThreePerformers;
+    private ArrayList<ResponseBean> Response;
 
     public String getStatus() {
         return status;
@@ -33,21 +52,9 @@ public class VCornerQuestionsResponse {
         this.code = code;
     }
 
-    public List<TopThreePerformersBean> getTopThreePerformers() {
-        return TopThreePerformers;
-    }
 
-    public void setTopThreePerformers(List<TopThreePerformersBean> TopThreePerformers) {
-        this.TopThreePerformers = TopThreePerformers;
-    }
 
-    public List<ResponseBean> getResponse() {
-        return Response;
-    }
 
-    public void setResponse(List<ResponseBean> Response) {
-        this.Response = Response;
-    }
 
     public static class TopThreePerformersBean {
         /**
@@ -87,25 +94,31 @@ public class VCornerQuestionsResponse {
 
     public static class ResponseBean {
         /**
-         * vId : 1
+         * vId : 3
          * eventTime : 10
-         * eventType : Quiz
-         * startDate : 10/18/2019
-         * startTime : 3:47:22 AM
+         * eventType : Quiz 1
+         * eventName : Diwali - 1
+         * startDate : 18/10/2019
+         * startTime : 5:39:17 PM
+         * starts : 18/10/2019 5:39:17 PM
+         * endDate : 28/10/2019
+         * endTime : 6:39:17 PM
+         * ends : 28/10/2019 6:39:17 PM
          * isClosed : false
-         * endDate : 10/20/2019
-         * endTime : 3:47:22 AM
-         * Event : [{"Qid":1,"title":"Which language is spoken in Karnataka?","options":[{"id":1,"value":"Marathi"},{"id":2,"value":"Hindi"},{"id":3,"value":"Malayalam"},{"id":4,"value":"Kannada"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":2,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":3,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":4,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"},{"Qid":5,"title":"Which are the important minerals found in manipur?","options":[{"id":1,"value":"Sillimanite, nickel, petroleum"},{"id":2,"value":"Oil, coal, manganese"},{"id":3,"value":"Iron, lime, bauxite"},{"id":4,"value":"None of the above"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"1"}]
+         * Event : [{"Qid":1,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"},{"Qid":2,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}],"quizType":"SelectOne","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"},{"Qid":3,"title":"When was Lord Buddha born?","options":[{"id":1,"value":"Yes"},{"id":2,"value":"No"}],"quizType":"TrueOrFalse","audio_path":"http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3","audio_id":"677","QPatternId":"3"}]
          */
 
         private int vId;
         private String eventTime;
         private String eventType;
+        private String eventName;
         private String startDate;
         private String startTime;
-        private boolean isClosed;
+        private String starts;
         private String endDate;
         private String endTime;
+        private String ends;
+        private boolean isClosed;
         private List<EventBean> Event;
 
         public int getVId() {
@@ -132,6 +145,14 @@ public class VCornerQuestionsResponse {
             this.eventType = eventType;
         }
 
+        public String getEventName() {
+            return eventName;
+        }
+
+        public void setEventName(String eventName) {
+            this.eventName = eventName;
+        }
+
         public String getStartDate() {
             return startDate;
         }
@@ -148,12 +169,12 @@ public class VCornerQuestionsResponse {
             this.startTime = startTime;
         }
 
-        public boolean isIsClosed() {
-            return isClosed;
+        public String getStarts() {
+            return starts;
         }
 
-        public void setIsClosed(boolean isClosed) {
-            this.isClosed = isClosed;
+        public void setStarts(String starts) {
+            this.starts = starts;
         }
 
         public String getEndDate() {
@@ -172,6 +193,22 @@ public class VCornerQuestionsResponse {
             this.endTime = endTime;
         }
 
+        public String getEnds() {
+            return ends;
+        }
+
+        public void setEnds(String ends) {
+            this.ends = ends;
+        }
+
+        public boolean isIsClosed() {
+            return isClosed;
+        }
+
+        public void setIsClosed(boolean isClosed) {
+            this.isClosed = isClosed;
+        }
+
         public List<EventBean> getEvent() {
             return Event;
         }
@@ -183,12 +220,12 @@ public class VCornerQuestionsResponse {
         public static class EventBean {
             /**
              * Qid : 1
-             * title : Which language is spoken in Karnataka?
-             * options : [{"id":1,"value":"Marathi"},{"id":2,"value":"Hindi"},{"id":3,"value":"Malayalam"},{"id":4,"value":"Kannada"}]
+             * title : When was Lord Buddha born?
+             * options : [{"id":1,"value":"586 BC"},{"id":2,"value":"1000 BC"},{"id":3,"value":"560 BC"},{"id":4,"value":"750 BC"}]
              * quizType : SelectOne
              * audio_path : http://tritontutebox.com/voxit/audio_upload/19 Century Train man.mp3
              * audio_id : 677
-             * QPatternId : 1
+             * QPatternId : 3
              */
 
             private int Qid;
@@ -258,7 +295,7 @@ public class VCornerQuestionsResponse {
             public static class OptionsBean {
                 /**
                  * id : 1
-                 * value : Marathi
+                 * value : 586 BC
                  */
 
                 private int id;

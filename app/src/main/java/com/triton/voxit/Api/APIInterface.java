@@ -26,6 +26,7 @@ import com.triton.voxit.model.SearchResponseData;
 import com.triton.voxit.model.ShareRequest;
 import com.triton.voxit.model.SignUpRequest;
 import com.triton.voxit.model.SingupData;
+import com.triton.voxit.model.TopThreeRequest;
 import com.triton.voxit.model.UpdatereferalRequest;
 import com.triton.voxit.model.UserLogResponse;
 import com.triton.voxit.requestpojo.UpdateJockeyProfilePicRequest;
@@ -168,7 +169,7 @@ public interface APIInterface {
 
 
     @GET("vCornerQuestions")
-    Call<VCornerQuestionsResponse> getVCornerQuestionsResponseCall(@Header("Content-Type") String type);
+    Call<TopThreeRequest> getVCornerQuestionsResponseCall(@Header("Content-Type") String type);
 
 
 
