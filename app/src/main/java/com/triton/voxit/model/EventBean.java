@@ -1,6 +1,7 @@
 package com.triton.voxit.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class EventBean implements Serializable {
 
@@ -58,6 +59,17 @@ public class EventBean implements Serializable {
     private String audio_path;
     private String audio_id;
     private String QPatternId;
+
+    public ArrayList<OptionsBean> getOptions() {
+        return options;
+    }
+
+    public void setOptions(ArrayList<OptionsBean> options) {
+        this.options = options;
+    }
+
+    private ArrayList<OptionsBean> options;
+
 
 
 }

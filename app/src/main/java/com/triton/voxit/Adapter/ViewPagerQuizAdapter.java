@@ -57,10 +57,11 @@ public class ViewPagerQuizAdapter extends PagerAdapter {
         final TextView tvAns2 = (TextView) imageLayout.findViewById(R.id.tvAns2);
         final TextView tvAns3 = (TextView) imageLayout.findViewById(R.id.tvAns3);
         final TextView tvAns4 = (TextView) imageLayout.findViewById(R.id.tvAns4);
+        final Button btnNext = (Button)imageLayout.findViewById(R.id.btnNext);
 
         tvQuestions.setText(""+eventBeanArrayList.get(position).getTitle());
 
-        final Button btnNext = (Button)imageLayout.findViewById(R.id.btnNext);
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

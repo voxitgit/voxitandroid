@@ -141,7 +141,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
                  public void onClick(View view) {
 
                      Intent in = new Intent(context,QuizQuestionsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    in.putExtra("EVENTSBEAN",responseBeanArrayList);
+                     in.putExtra("EVENTSBEAN",responseBeanArrayList);
                      context.startActivity(in);
 
                  }
