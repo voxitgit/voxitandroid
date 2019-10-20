@@ -217,10 +217,10 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     }
     private void getCalculateTimes(String endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
 
         try {
-            Date date1 =getCurrentDateandTime();
+            Date date1 = getCurrentDateandTime();
             Date date2 = simpleDateFormat.parse(endDate);
             calculateDuration(date1,date2);
             Log.i("STARTEND1","Start"+date1+"End"+date2);

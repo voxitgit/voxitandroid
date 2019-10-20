@@ -6,10 +6,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.triton.voxit.Adapter.GenreAdapter;
 import com.triton.voxit.Adapter.SelectGenreAdapter;
@@ -35,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GenreActivity extends Activity {
+public class GenreActivity extends NavigationDrawer {
     RecyclerView recyclerView;
     private ProgressDialog pDialog;
     private APIInterface apiInterface;
@@ -43,6 +48,7 @@ public class GenreActivity extends Activity {
     private ArrayList<GenreData> genreData;
     String flag;
     SessionManager session;
+    private TextView headertitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,10 @@ public class GenreActivity extends Activity {
     }
     private void initUI(){
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        headertitle = (TextView) findViewById(R.id.header_title);
+        headertitle.setText("Genre");
+
+
 //        Intent i = getIntent();
 //        flag = i.getStringExtra("login");
 //        if (flag.equals("L")){
@@ -87,6 +97,8 @@ public class GenreActivity extends Activity {
             startActivity(new Intent(this, LoginActivity.class)
                     .putExtra("login","F").setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         }
+
+
     }
 
     public void APICall(){
@@ -172,4 +184,6 @@ public class GenreActivity extends Activity {
         //finally set adapter
 //        recyclerView.setAdapter(new SelectGenreAdapter( GenreDummyList(),this));
     }
+
+
 }
