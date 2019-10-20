@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class OptionsBean implements Serializable {
     private int id;
 
+    private String value;
     public int getId() {
         return id;
     }
@@ -21,7 +22,7 @@ public class OptionsBean implements Serializable {
         this.value = value;
     }
 
-    private String value;
+
 
 
 }

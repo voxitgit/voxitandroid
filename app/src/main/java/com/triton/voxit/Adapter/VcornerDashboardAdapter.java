@@ -59,6 +59,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     Long elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds;
     String strMSgdaystime;
     String strMsg;
+    String EventType;
 
 
 
@@ -118,6 +119,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
         currentItem = responseBeanArrayList.get(position);
         //QuizQuestionsActivity.responseBean = responseBeanList.get(position);
         for (int i = 0; i < responseBeanArrayList.size(); i++) {
+            // EventType = currentItem.getEventType();
             holder.txt_eventtype.setText(currentItem.getEventType());
             String startDate = currentItem.getStarts();
             String endDate = currentItem.getEnds();
@@ -139,9 +141,10 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
              holder.ivNext.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-
+                     String eventType= responseBeanArrayList.get(position).getEventType();
                      Intent in = new Intent(context,QuizQuestionsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                      in.putExtra("EVENTSBEAN",responseBeanArrayList);
+                     in.putExtra("EVENT",eventType);
                      context.startActivity(in);
 
                  }
@@ -214,7 +217,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     }
     private void getCalculateTimes(String endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 
         try {
             Date date1 =getCurrentDateandTime();

@@ -67,6 +67,8 @@ public class VcornerActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +93,7 @@ public class VcornerActivity extends AppCompatActivity {
         tvfirstname = (TextView)findViewById(R.id.tvfirstname);
         tvsecondname = (TextView)findViewById(R.id.tvsecondname);
         tvthirdname = (TextView)findViewById(R.id.tvthirdname);
+
 
         rv_vcornerdashboard = (RecyclerView)findViewById(R.id.rvvcornerdashboard);
 
@@ -126,6 +129,7 @@ public class VcornerActivity extends AppCompatActivity {
                         responseBeanArrayList.get(i).getEndDate();
                         Log.i("RES",""+ responseBeanArrayList.get(i).getEventName());
                         eventBeanArrayList = responseBeanArrayList.get(i).getEvent();
+
 
                     }
 
