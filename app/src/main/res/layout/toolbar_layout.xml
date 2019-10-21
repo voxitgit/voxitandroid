@@ -48,25 +48,38 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLanguage">
                 <TextView
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:text="Welcome"
+                    android:layout_marginLeft="@dimen/big_margin_value"
+                    />
+                <TextView
                     android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
                     android:text="Language"
                     android:layout_marginLeft="@dimen/big_margin_value"
+                    android:visibility="gone"
                     />
                 <ImageView
                     android:id="@+id/downIcon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:src="@drawable/icon3" />
+                    android:src="@drawable/icon3"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/tvgenre"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/genre"
                     android:text="Genre"

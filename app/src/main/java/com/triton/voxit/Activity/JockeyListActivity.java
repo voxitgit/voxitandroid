@@ -37,7 +37,6 @@ import com.triton.voxit.Service.MediaPlayerService;
 import com.triton.voxit.SessionManager.SessionManager;
 import com.triton.voxit.Utlity.MediaPlayerSingleton;
 import com.triton.voxit.app.App;
-import com.triton.voxit.model.AudioDetailData;
 import com.triton.voxit.model.AudioListData;
 import com.triton.voxit.model.CheckFollowRequest;
 import com.triton.voxit.model.FollowResponseData;
@@ -57,8 +56,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.triton.voxit.Activity.NotificationActivity.notifyList;
 
 public class JockeyListActivity extends NavigationDrawer implements JockeyListInterface, View.OnClickListener {
     RecyclerView recyclerView;
@@ -148,95 +145,6 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
         };
 
         registerReceiver(myReceiver, new IntentFilter("MP_STATUS"));
-    }
-
-
-
-    private int findCurrentPlayPos() {
-        int pos = mps.getCurrentPlayPos();
-
-
-        for (int i = 0; i <= audioListData.size() - 1; i++) {
-            AudioListData model = audioListData.get(i);
-            if (model.getAudio_path().equalsIgnoreCase(mps.getFileName())) {
-                pos = i;
-                break;
-            }
-        }
-
-        return pos;
-    }
-
-
-    private void playNextSong() {
-        Log.w(TAG, "play next song called");
-        if (mps.getCurrentPlayPos() != -1) {
-
-            int pos = findCurrentPlayPos();
-
-            Log.w(TAG, "pos " + pos + mps.getCurrentPlayPos() + " list size " + audioListData.size());
-            if ((pos + 1) < audioListData.size()) {
-                try {
-                    pos += 1;
-                    AudioListData model = audioListData.get(pos);
-
-                    playSong("JockeyList", model.getAudio_path(), model.getName(),
-                            model.getImage_path(), model.getTitle(), pos, "empty", model.getAudio_id() + "");
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                    clearMiniPLayer();
-
-                }
-
-
-
-            } else {
-                Log.w(TAG, "else part working");
-                clearMiniPLayer();
-
-            }
-        }
-    }
-
-    private void clearMiniPLayer() {
-        miniPlayerLayout.setVisibility(View.GONE);
-        clearMediaPLayer();
-        clearNotification();
-    }
-
-    private void clearMediaPLayer() {
-        mps.releasePlayer();
-        mps.setType("empty");
-        mps.setMediaPlayerStatus("empty");
-        mps.setSubType("empty");
-        mps.setAuthorName("empty");
-        setStatus("empty");
-    }
-
-
-    private void setCompleteListener() {
-        if (mps.mp != null) {
-            mps.mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    // imgMiniPlay.setImageResource(R.drawable.play_blue);
-
-                    if (mps.mp != null) {
-
-                        imgMiniPlay.setImageResource(R.drawable.ic_play);
-
-                        Log.w(TAG, "song completed");
-                        // playMethod(songIndex + 1);
-
-                        playNextSong();
-
-
-                    }
-
-
-                }
-            });
-        }
     }
 
 
@@ -334,10 +242,12 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
                                     .putExtra("image", model.getImage_path())
                                     .putExtra("name", model.getName())
                                     .putExtra("audio_length", model.getAudio_length())
-                                    .putExtra("audio_id", model.getAudio_id() + "")
+                                    .putExtra("audio_id", model.getAudio_id()+"")
                                     .putExtra("type", "JockeyList")
                                     .putExtra("songsList", audioListData)
                                     .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+
                             JockeyListActivity.this.finish();
                         }
                     }
@@ -356,7 +266,6 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
 
     private void setCurrentPlayPos(int pos) {
 
-        Log.w(TAG, "pos " + pos);
         mps.setCurrentPlayPos(pos);
     }
 
@@ -533,8 +442,24 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
             });
 //                Log.w("Duartion ", duration + "");
 
+            mps.mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // imgMiniPlay.setImageResource(R.drawable.play_blue);
 
-            setCompleteListener();
+                    if (mps.mp != null) {
+                        setStatus("completed");
+                        imgMiniPlay.setImageResource(R.drawable.pause_blue);
+                        // playMethod(songIndex + 1);
+
+                        //  playNextSong();
+
+
+                    }
+
+
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -878,8 +803,7 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
 
 
     @Override
-    protected void
-    onResume() {
+    protected void onResume() {
         super.onResume();
 
         if (mps.mp != null) {
@@ -905,8 +829,6 @@ public class JockeyListActivity extends NavigationDrawer implements JockeyListIn
 
             }
 
-
-            setCompleteListener();
         }
 
 

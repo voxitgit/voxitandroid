@@ -1,11 +1,8 @@
-package com.triton.voxit.responsepojo;
+package com.triton.voxit.model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class VCornerQuestionsResponse implements Serializable {
-
+public class ResponseBeanYuvi {
 
     /**
      * TopThreePerformers : [{"Rank":1,"Name":"TinTin","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTL7saqA1GZ8wUb9TUTGZzPm3aGpR_hNXJOSwsGAzxjRo0a0fPL"},{"Rank":2,"Name":"Naruto","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR5xcspxX_ZZjNxKSchevclRGrXCN_GCqdqqfsAyeopSoIlf2cx"},{"Rank":3,"Name":"Ichigo","Image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQA1wmiaCqoHXt4stSP_CB5BOwL2FtCbPPYMJQf9OqEQ3LMdOQy"}]
@@ -16,25 +13,8 @@ public class VCornerQuestionsResponse implements Serializable {
 
     private String status;
     private int code;
-
-    public ArrayList<TopThreePerformersBean> getTopThreePerformers() {
-        return TopThreePerformers;
-    }
-
-    public void setTopThreePerformers(ArrayList<TopThreePerformersBean> topThreePerformers) {
-        TopThreePerformers = topThreePerformers;
-    }
-
-    public ArrayList<ResponseBean> getResponse() {
-        return Response;
-    }
-
-    public void setResponse(ArrayList<ResponseBean> response) {
-        Response = response;
-    }
-
-    private ArrayList<TopThreePerformersBean> TopThreePerformers;
-    private ArrayList<ResponseBean> Response;
+    private List<TopThreePerformersBean> TopThreePerformers;
+    private List<ResponseBean> Response;
 
     public String getStatus() {
         return status;
@@ -52,9 +32,21 @@ public class VCornerQuestionsResponse implements Serializable {
         this.code = code;
     }
 
+    public List<TopThreePerformersBean> getTopThreePerformers() {
+        return TopThreePerformers;
+    }
 
+    public void setTopThreePerformers(List<TopThreePerformersBean> TopThreePerformers) {
+        this.TopThreePerformers = TopThreePerformers;
+    }
 
+    public List<ResponseBean> getResponse() {
+        return Response;
+    }
 
+    public void setResponse(List<ResponseBean> Response) {
+        this.Response = Response;
+    }
 
     public static class TopThreePerformersBean {
         /**

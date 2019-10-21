@@ -26,8 +26,13 @@ package com.triton.voxit.Activity;
         import com.triton.voxit.apputils.Constants;
         import com.triton.voxit.apputils.RestUtils;
         import com.triton.voxit.listeners.OnLoadMoreListener;
+        import com.triton.voxit.model.EventBean;
+        import com.triton.voxit.model.ResponseBean;
+        import com.triton.voxit.model.TopThreePerformers;
+        import com.triton.voxit.model.TopThreeRequest;
         import com.triton.voxit.responsepojo.VCornerQuestionsResponse;
 
+        import java.util.ArrayList;
         import java.util.List;
         import java.util.Timer;
         import java.util.TimerTask;
@@ -49,8 +54,19 @@ public class VcornerActivity extends AppCompatActivity {
     VcornerDashboardAdapter vcornerDashboardAdapter;
     RecyclerView rv_vcornerdashboard;
 
-    List<VCornerQuestionsResponse.ResponseBean> responseBeanList;
+    ArrayList<VCornerQuestionsResponse> responseBeanList;
     private SharedPreferences preferences;
+    VCornerQuestionsResponse vCornerQuestionsResponse;
+    TopThreeRequest topThreeRequest;
+    ArrayList<TopThreePerformers> topThreePerformersArrayList;
+
+    ArrayList<ResponseBean> responseBeanArrayList;
+
+    ArrayList<EventBean> eventBeanArrayList;
+
+
+
+
 
 
     @Override
@@ -78,6 +94,7 @@ public class VcornerActivity extends AppCompatActivity {
         tvsecondname = (TextView)findViewById(R.id.tvsecondname);
         tvthirdname = (TextView)findViewById(R.id.tvthirdname);
 
+
         rv_vcornerdashboard = (RecyclerView)findViewById(R.id.rvvcornerdashboard);
 
         ivHomebtn.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +107,89 @@ public class VcornerActivity extends AppCompatActivity {
 
 
     private void getVCornerQuestionsResponse() {
+
+        progressBar.setVisibility(View.VISIBLE);
+        APIInterface ApiService = APIClient.getClient().create(APIInterface.class);
+        Call<TopThreeRequest> call = ApiService.getVCornerQuestionsResponseCall(RestUtils.getContentType());
+        call.enqueue(new Callback<TopThreeRequest>() {
+            @Override
+            public void onResponse(Call<TopThreeRequest> call, Response<TopThreeRequest> response) {
+                progressBar.setVisibility(View.GONE);
+                Log.i("VCornerQuestionsRes", "--->" + new Gson().toJson(response.body()));
+                if (response.body() != null) {
+                    topThreeRequest = response.body();
+
+                    topThreePerformersArrayList = topThreeRequest.getTopThreePerformers();
+                    for(int i=0; i<topThreePerformersArrayList.size(); i++){
+                        topThreePerformersArrayList.get(i).getImage();
+                        Log.i("RES",""+ topThreePerformersArrayList.get(i).getImage());
+                    }
+
+                    responseBeanArrayList = topThreeRequest.getResponse();
+                    for(int i=0; i<responseBeanArrayList.size(); i++){
+                        responseBeanArrayList.get(i).getEndDate();
+                        Log.i("RES",""+ responseBeanArrayList.get(i).getEventName());
+                        eventBeanArrayList = responseBeanArrayList.get(i).getEvent();
+
+
+                    }
+
+
+
+                    if(1 == response.body().getTopThreePerformers().get(0).getRank()){
+                        tvfirstname.setText(response.body().getTopThreePerformers().get(0).getName());
+                        if(!response.body().getTopThreePerformers().get(0).getImage().isEmpty()){
+                            Glide.with(getApplicationContext())
+                                    .load(response.body().getTopThreePerformers().get(0).getImage())
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
+                                    .error(R.drawable.logo_white)
+                                    .into(civfirst);
+                        }
+
+                    }
+                    if(2 == response.body().getTopThreePerformers().get(1).getRank()){
+                        tvsecondname.setText(response.body().getTopThreePerformers().get(1).getName());
+                        if(!response.body().getTopThreePerformers().get(1).getImage().isEmpty()){
+                            Glide.with(getApplicationContext())
+                                    .load(response.body().getTopThreePerformers().get(1).getImage())
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
+                                    .error(R.drawable.logo_white)
+                                    .into(civsecond);
+                        }
+
+                    }
+                    if(3 == response.body().getTopThreePerformers().get(2).getRank()){
+                        tvthirdname.setText(response.body().getTopThreePerformers().get(2).getName());
+                        if(!response.body().getTopThreePerformers().get(2).getImage().isEmpty()){
+                            Glide.with(getApplicationContext())
+                                    .load(response.body().getTopThreePerformers().get(2).getImage())
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
+                                    .error(R.drawable.logo_white)
+                                    .into(civthird);
+                        }
+
+                    }
+                }
+
+
+
+                setView();
+            }
+
+            @Override
+            public void onFailure(Call<TopThreeRequest> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Log.i("VCornerQuestionsResflr", "--->" + t.getMessage());
+                // Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+  /*  private void getVCornerQuestionsResponse() {
         progressBar.setVisibility(View.VISIBLE);
         APIInterface ApiService = APIClient.getClient().create(APIInterface.class);
         Call<VCornerQuestionsResponse> call = ApiService.getVCornerQuestionsResponseCall(RestUtils.getContentType());
@@ -99,9 +199,17 @@ public class VcornerActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 Log.i("VCornerQuestionsRes", "--->" + new Gson().toJson(response.body()));
                 if (response.body() != null) {
-                    responseBeanList = response.body().getResponse();
+                    vCornerQuestionsResponse = response.body();
+                    vCornerQuestionsResponse.getTopThreePerformers();
 
-                  if(1 == response.body().getTopThreePerformers().get(0).getRank()){
+                    responseBeanList = vCornerQuestionsResponse.getResponse();
+                    for(int i=0; i<responseBeanList.size(); i++){
+                        responseBeanList.get(i).getEvent();
+                        Log.i("RES",""+ responseBeanList.);
+                    }
+
+
+                    if(1 == response.body().getTopThreePerformers().get(0).getRank()){
                       tvfirstname.setText(response.body().getTopThreePerformers().get(0).getName());
                       if(!response.body().getTopThreePerformers().get(0).getImage().isEmpty()){
                           Glide.with(getApplicationContext())
@@ -139,6 +247,8 @@ public class VcornerActivity extends AppCompatActivity {
                     }
                 }
 
+
+
                 setView();
             }
 
@@ -150,7 +260,7 @@ public class VcornerActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     private void setView() {
 
@@ -158,14 +268,14 @@ public class VcornerActivity extends AppCompatActivity {
         rv_vcornerdashboard.setItemAnimator(new DefaultItemAnimator());
 
 
-        vcornerDashboardAdapter = new VcornerDashboardAdapter(VcornerActivity.this, responseBeanList, rv_vcornerdashboard);
+        vcornerDashboardAdapter = new VcornerDashboardAdapter(getApplicationContext(), responseBeanArrayList, rv_vcornerdashboard);
 
-        rv_vcornerdashboard.setAdapter(vcornerDashboardAdapter);
+       rv_vcornerdashboard.setAdapter(vcornerDashboardAdapter);
 
         vcornerDashboardAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if (preferences.getInt(Constants.INBOX_TOTAL, 0) > responseBeanList.size()) {
+                if (preferences.getInt(Constants.INBOX_TOTAL, 0) > topThreePerformersArrayList.size()) {
                     Log.e("haint", "Load More");
 
 
