@@ -66,8 +66,4 @@
     <string name="forgot_otp_msg">Forgot password request successful. Please check your Email to proceed further. </string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
-
-    <string name="message_minutes">Please Enter Minutes…</string>
-
-    <string name="questionsandanswer">You can also listen to the audio here below "\n" for answering the question.</string>
 </resources>

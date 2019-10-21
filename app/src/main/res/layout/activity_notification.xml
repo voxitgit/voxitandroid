@@ -38,6 +38,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/miniPlayerLayout"
         android:layout_below="@+id/header_layout">
         <ScrollView
             android:layout_width="match_parent"
@@ -74,7 +75,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/big_margin_value"
         app:menu="@menu/bottom_navigation"
         app:itemBackground="@color/white"
         app:labelVisibilityMode="labeled"

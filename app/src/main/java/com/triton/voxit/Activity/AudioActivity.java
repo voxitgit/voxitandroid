@@ -115,7 +115,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
     ArrayList<String> audioList;
     //int audio_id;
     String audio_id, type, jockey_id;
-    int songIndex;
+    int songIndex = 0;
     ArrayList<AudioDetailsResponseBean> list = new ArrayList<AudioDetailsResponseBean>();
     private TextView headerL, headerG;
     private ImageView downIcon, downIcon_g, searchImg;
@@ -129,7 +129,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
     private APIInterface apiInterface;
     private RecentlyPlayedResponse recentlyPlayedResponse;
     private int userid;
-    private boolean isCheck=true;
+    private boolean isCheck = true;
     private ArrayList<NotifyDataList> audiosongsNotify = new ArrayList<>();
     ArrayList<NotifyDataList> notifylist = new ArrayList<NotifyDataList>();
 
@@ -252,20 +252,6 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             }
         }
 
-        /*if (audiosongsNotify != null) {
-            audiosongsNotify = (ArrayList<NotifyDataList>) getIntent().getSerializableExtra("songsList");
-             Integer audioid = Integer.valueOf(audio_id);
-            for (int l = 0; l < audiosongsNotify.size(); l++) {
-                if (audio_id.equals(audiosongsNotify.get(l).getAudio_id())) {
-                    songIndex = l;
-                    Log.e("l", String.valueOf(l));
-                    playMethod(0);
-                    displayData();
-                    forwardMusic();
-                }
-            }
-        }*/
-
 
         if (audiosongsSearchList != null) {
             audiosongsSearchList = (ArrayList<SearchData>) getIntent().getSerializableExtra("songsList");
@@ -298,6 +284,23 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             }
         }
 
+
+        if (audiosongsNotify.size() > 0) {
+            Log.w(TAG, "inside notify on create " + audiosongsNotify.size());
+            notifylist = (ArrayList<NotifyDataList>) getIntent().getSerializableExtra("songsList");
+            //  Integer audioid = Integer.valueOf(audio_id);
+            for (int l = 0; l < notifylist.size(); l++) {
+                if (audio_id.equals(notifylist.get(l).getAudio_id())) {
+                    songIndex = l;
+                    Log.e("l", String.valueOf(l));
+                    playMethod(0);
+                    displayData();
+                    forwardMusic();
+                    break;
+                }
+            }
+        }
+
     }
 
     private void APICall() {
@@ -308,7 +311,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             json.put("jockey_id", userid);
             json.put("audio_id", au_id);
             Log.e("testtttt", String.valueOf(json));
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("Exception ", e.toString());
         }
 
@@ -323,7 +326,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             public void onResponse(Call<RecentlyPlayedResponse> call, Response<RecentlyPlayedResponse> response) {
 
                 recentlyPlayedResponse = response.body();
-                if (recentlyPlayedResponse != null){
+                if (recentlyPlayedResponse != null) {
                     Log.e("audio_recent", recentlyPlayedResponse.getStatus());
                 }
             }
@@ -346,7 +349,11 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                 if (intent.getExtras().getString("status").equalsIgnoreCase("playing")) {
 
                     play.setImageResource(R.drawable.pause_blue);
-                    mps.mp.start();
+                    if (mps.mp != null) {
+                        if (!mps.mp.isPlaying()) {
+                            mps.mp.start();
+                        }
+                    }
                     setStatus("playing");
 //                    buildNotification(MediaPlayerService.ACTION_PLAY);
 
@@ -840,7 +847,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                             play.setImageResource(R.drawable.pause_blue);
                             // playMethod(songIndex + 1);
 //                            audioLogUpdateAPI(mps.mp.getCurrentPosition(),mps.mp.getDuration());
-                           // clearCallbacks();
+                            // clearCallbacks();
                             playNextSong();
 
                             forwardMusic();
@@ -1067,7 +1074,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                     @Override
                     public void onPrepared(MediaPlayer mp) {
 
-                        Log.w(TAG,"on prepared done");
+                        Log.w(TAG, "on prepared done");
                         mp.start();
 //                        Log.w(TAG,"duration on prepared "+ mp.getDuration());
                     }
@@ -1246,7 +1253,9 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                 });
 
 
-            }else if (type.equals("Notify")) {
+            } else if (type.equals("Notify")) {
+
+                Log.w(TAG, "notify calling" + notifylist.get(songIndex).getAudioDetail().getAudio_path());
 
                 setType(type);
                 String fileName = notifylist.get(songIndex).getTitle();
@@ -1256,10 +1265,10 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                 setImageUrl(notifylist.get(songIndex).getAudioDetail().getImage_path());
 
 
-                mps.setSubType(getIntent().getExtras().getString("subType"));
+                //mps.setSubType(getIntent().getExtras().getString("subType"));
 
 
-                Log.e("notifysongsList", String.valueOf(notifylist));
+                Log.w("notifysongsList", String.valueOf(notifylist));
                 if (!isPlaying) {
                     releasePlayer();
                     // player = new MediaPlayer();
@@ -1399,7 +1408,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             json.put("listened_time", lisent_time);
             json.put("audio_time", total_time);
             Log.e("testtAPI", String.valueOf(json));
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("Exception ", e.toString());
         }
 
@@ -1413,7 +1422,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             @Override
             public void onResponse(Call<AudioLogResponse> call, Response<AudioLogResponse> response) {
                 AudioLogResponse resource = response.body();
-                if (resource != null){
+                if (resource != null) {
 
                 }
             }
@@ -1577,7 +1586,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
         totaltime = i.getStringExtra("audio_length");
         audio_id = i.getStringExtra("audio_id");
         type = i.getStringExtra("type");
-        Log.e("type", type + jockey_id);
+        Log.w(TAG, type + jockey_id + " audio id " + audio_id);
 
 
         if (type.equals("Trending")) {
@@ -1624,7 +1633,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
             Log.e("audiosongsJockeyList", String.valueOf(audiosongsJockeyList));
         } else if (type.equals("Notify")) {
             audiosongsNotify = (ArrayList<NotifyDataList>) getIntent().getSerializableExtra("songsList");
-            Log.e("Notify", String.valueOf(audiosongsNotify.size()));
+            Log.w(TAG, "init ui");
 
 //            for (int e = 0; e < audiosongsNotify.size(); e++) {
 //                NotifyDataList notifyDataList = new NotifyDataList();
@@ -1852,7 +1861,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                         songIndex = audiosongsJockeyList.size() - 1;
                         playMethod(songIndex);
                     }
-                }else if (type.equals("Notify")) {
+                } else if (type.equals("Notify")) {
                     play.setImageResource(R.drawable.pause_blue);
                     if (songIndex > 0) {
                         songIndex = songIndex - 1;
@@ -1931,7 +1940,7 @@ public class AudioActivity extends NavigationDrawer implements View.OnClickListe
                 songIndex = 0;
                 playMethod(songIndex);
             }
-        }else if (type.equals("Notify")) {
+        } else if (type.equals("Notify")) {
             play.setImageResource(R.drawable.pause_blue);
             if (songIndex < list.size() - 1) {
                 songIndex = songIndex + 1;

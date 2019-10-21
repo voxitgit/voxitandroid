@@ -23,6 +23,8 @@ public final class MediaPlayerSingleton {
     private int currentPlayPos = -1;
     private String subType = "empty";
 
+    private String TAG = "Mps";
+
     private ArrayList<AudioListData> audioListData = new ArrayList<>();
 
     private ArrayList<SearchData> searchData = new ArrayList<>();
@@ -106,6 +108,7 @@ public final class MediaPlayerSingleton {
 
     public void setSubType(String subType) {
         this.subType = subType;
+        Log.w(TAG,"sub type set "+ subType);
     }
 
     public String getSubType() {
@@ -119,6 +122,8 @@ public final class MediaPlayerSingleton {
 
     public void setJockeyList(ArrayList<AudioListData> audioListData) {
         this.audioListData = audioListData;
+
+        Log.w(TAG,"jockey list "+ audioListData.size());
     }
 
     public ArrayList<AudioListData> getJockeyListData() {
