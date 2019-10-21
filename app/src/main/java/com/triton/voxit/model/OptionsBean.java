@@ -23,6 +23,11 @@ public class OptionsBean implements Serializable {
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "OptionsBean{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

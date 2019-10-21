@@ -70,6 +70,16 @@ public class EventBean implements Serializable {
 
     private ArrayList<OptionsBean> options;
 
-
-
+    @Override
+    public String toString() {
+        return "EventBean{" +
+                "Qid=" + Qid +
+                ", title='" + title + '\'' +
+                ", quizType='" + quizType + '\'' +
+                ", audio_path='" + audio_path + '\'' +
+                ", audio_id='" + audio_id + '\'' +
+                ", QPatternId='" + QPatternId + '\'' +
+                ", options=" + options +
+                '}';
+    }
 }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.triton.voxit.Adapter.ViewPagerQuizAdapter;
 import com.triton.voxit.R;
@@ -25,15 +26,15 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
 
     private ArrayList<ResponseBean> responseBeanList;
 
-    private  ArrayList<EventBean> eventBeanArrayList;
+    //private  ArrayList<EventBean> eventBeanArrayList;
 
     private ArrayList<OptionsBean> optionsBeanArrayList;
 
    // ViewPagerQuizAdapter viewPagerQuizAdapter;
   //  private  ViewPager mPager;
 
-    TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
-    Button btnNext, btnPrevious;
+private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
+  private   Button btnNext, btnPrevious;
 
     private int Qid;
     private String title;
@@ -50,7 +51,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
 
    String EventType;
 
-   private List<EventBean> eventBeanList;
+   private List<EventBean> eventBeanList=new ArrayList<>();
 
     TextView tvToolbarTittle;
 
@@ -78,6 +79,8 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
         btnNext.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
 
+
+
         Bundle bundle = getIntent().getExtras();
         EventType = bundle.getString("EVENT");
         Log.i("EventType-->",EventType);
@@ -86,9 +89,10 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
         responseBeanList = (ArrayList<ResponseBean>)getIntent().getSerializableExtra("EVENTSBEAN");
         if(responseBeanList != null){
             eventBeanList = new ArrayList<>();
+            Log.i("Size","-->"+responseBeanList.size());
             for(int i=0; i<responseBeanList.size(); i++){
                 responseBeanList.get(i).getEvent().get(i).getQid();
-                eventBeanArrayList = responseBeanList.get(i).getEvent();
+              List<EventBean>  eventBeanArrayList = responseBeanList.get(i).getEvent();
                 title = eventBeanArrayList.get(i).getTitle();
                 quizType = eventBeanArrayList.get(i).getQuizType();
 
@@ -102,29 +106,30 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
                     audio_id =  eventBeanArrayList.get(i).getAudio_id();
                     QPatternId = eventBeanArrayList.get(i).getAudio_id();
 
-                    EventBean eventBean = new EventBean();
-                    eventBean.setTitle(eventBeanArrayList.get(i).getTitle());
-                    eventBean.setQuizType(eventBeanArrayList.get(i).getQuizType());
-                    eventBean.setAudio_path(eventBeanArrayList.get(i).getAudio_path());
-                    eventBean.setAudio_id(eventBeanArrayList.get(i).getAudio_id());
-                    eventBean.setQPatternId(eventBeanArrayList.get(i).getQPatternId());
+                    for(int j=0;j<eventBeanArrayList.size();j++){
+                        EventBean eventBean = new EventBean();
+                        eventBean.setTitle(eventBeanArrayList.get(j).getTitle());
+                        eventBean.setQuizType(eventBeanArrayList.get(j).getQuizType());
+                        eventBean.setAudio_path(eventBeanArrayList.get(j).getAudio_path());
+                        eventBean.setAudio_id(eventBeanArrayList.get(j).getAudio_id());
+                        eventBean.setQPatternId(eventBeanArrayList.get(j).getQPatternId());
+                        eventBean.setQid(eventBeanArrayList.get(j).getQid());
+                       List<OptionsBean> optionsBeanArrayList = eventBeanArrayList.get(j).getOptions();
 
-                    optionsBeanArrayList = eventBeanArrayList.get(i).getOptions();
+                        ArrayList optionsBeanList = new ArrayList<>();
 
-                    ArrayList optionsBeanList = new ArrayList<>();
-
-                    for(int j=0;j<optionsBeanArrayList.size();j++){
-                        OptionsBean optionsBean = new OptionsBean();
-                        optionsBean.setValue(optionsBeanArrayList.get(j).getValue());
-                        optionsBean.setId(optionsBeanArrayList.get(j).getId());
-                        optionsBeanList.add(optionsBean);
-
-                        Log.e("Value1",optionsBeanArrayList.get(j).getValue());
+                        for(int k=0;k<optionsBeanArrayList.size();k++){
+                            OptionsBean optionsBean = new OptionsBean();
+                            optionsBean.setValue(optionsBeanArrayList.get(k).getValue());
+                            optionsBean.setId(optionsBeanArrayList.get(k).getId());
+                            optionsBeanList.add(optionsBean);
+                            Log.e("Value1",optionsBeanArrayList.get(k).getValue());
 
 
+                        }
+                        eventBean.setOptions(optionsBeanList);
+                        eventBeanList.add(eventBean);
                     }
-                    eventBean.setOptions(optionsBeanList);
-                    eventBeanList.add(eventBean);
 
                 }
 
@@ -140,63 +145,67 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
               //  mPager.setAdapter(viewPagerQuizAdapter);
 
             }
-
+            Log.i("EventBeanListSize","-->"+eventBeanList);
             for(int i=0; i<eventBeanList.size();i++){
-                tvQuestions.setText(eventBeanList.get(i).getTitle());
+                tvQuestions.setText(eventBeanList.get(i).getQid()+".)"+eventBeanList.get(i).getTitle());
                 String quizType=eventBeanList.get(i).getQuizType();
                 if("SelectOne".equalsIgnoreCase(quizType)){
                     for (OptionsBean answers:eventBeanList.get(i).getOptions()) {
                         selectOneanswerOptions(answers.getId(),answers.getValue());
+
                     }
+                    selectedAnswerQidAnsId(eventBeanList.get(i).getQid(),eventBeanList.get(i).getOptions().get(i).getId(),
+                            eventBeanList.get(i).getOptions().get(i).getId());
+
+
                 }else if("TrueOrFalse".equalsIgnoreCase(quizType)){
                     for (OptionsBean answers:eventBeanList.get(i).getOptions()) {
                         trueFalseanswerOptions(answers.getId(),answers.getValue());
                     }
                 }
-                count=1;
+                count=0;
                 break;
             }
 
             checkPreviousEnableOrNot();
-             checkNextEnableOrNot();
+            checkNextEnableOrNot();
 
         }
-
-
-
-
-
-
-
-
-
-
-
         }
 
-    private void setQuestionsAndAnswers(String value) {
-        tvAns1.setText(value);
-        tvAns2.setText(value);
-        tvAns3.setText(value);
-        tvAns4.setText(value);
-        Log.e("Value1",value);
+    private void selectedAnswerQidAnsId(int qid, int id, int ans) {
+        tvAns1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
+            }
+        });
+        tvAns2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
 
+
+            }
+        });
+        tvAns3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+        tvAns4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
     }
 
-    private void setQuestionsAndAnswer(int num){
-        tvQuestions.setText(""+title);
-        tvAns1.setText("");
-        tvAns2.setText("");
-        tvAns3.setText("");
-        tvAns4.setText("");
-       /* tv_question.setText(question.getQuestion(num));
-        btn_one.setText(question.getchoice1(num));
-        btn_two.setText(question.getchoice2(num));
-        btn_three.setText(question.getchoice3(num));
-        btn_four.setText(question.getchoice4(num));
-
-        answer = question.getCorrectAnswer(num);*/
-    }
 
     private void selectOneanswerOptions(Integer id,String answer){
         switch (id){
@@ -243,10 +252,11 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
     }
 
     private void checkNextEnableOrNot(){
-        if(count<eventBeanList.size()-1){
+        Log.i("count--",""+count+" "+eventBeanList.size());
+        if((count+1)==eventBeanList.size()){
             btnNext.setVisibility(View.INVISIBLE);
         }else{
-            btnNext.setVisibility(View.VISIBLE);
+     btnNext.setVisibility(View.VISIBLE);
         }
     }
 
@@ -259,6 +269,7 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
             case R.id.btnNext:
                 nextBtn();
                 break;
+
         }
 
     }
@@ -267,48 +278,52 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
         if(count>0){
             count = count -1;
             getCurrentQuestion(count);
-            checkPreviousEnableOrNot();
-           // checkNextEnableOrNot();
             Log.i("Count:",""+count);
         }else {
-            count = eventBeanArrayList.size() - 1;
+            count = eventBeanList.size() - 1;
             getCurrentQuestion(count);
-            checkPreviousEnableOrNot();
-           // checkNextEnableOrNot();
+
         }
+        checkPreviousEnableOrNot();
+        checkNextEnableOrNot();
     }
 
     private void nextBtn() {
-        if(count<eventBeanArrayList.size()-1){
-            count = count + 1;
-            getCurrentQuestion(count);
-            checkPreviousEnableOrNot();
-           // checkNextEnableOrNot();
-        } else {
-            count = 0;
-            checkPreviousEnableOrNot();
-            //checkNextEnableOrNot();
+        Log.i("count",""+count);
+        Log.i("CountList",""+(eventBeanList.size()-1));
 
+        if(count==eventBeanList.size()){
+            count = count;
+            getCurrentQuestion(count);
+        }else{
+            count = count +1;
+            getCurrentQuestion(count);
         }
+        checkPreviousEnableOrNot();
+        checkNextEnableOrNot();
     }
 
 
 private void getCurrentQuestion(Integer i){
     try{
-        Integer indexPos=i-1;
-        tvQuestions.setText(eventBeanList.get(indexPos).getTitle());
+        Integer indexPos=i;
+        Log.i("eventBeanList",""+indexPos);
+        Log.i("eventBeanList",""+eventBeanList.get(indexPos));
+        tvQuestions.setText(eventBeanList.get(indexPos).getQid()+"."+eventBeanList.get(indexPos).getTitle());
         String quizType=eventBeanList.get(indexPos).getQuizType();
         if("SelectOne".equalsIgnoreCase(quizType)){
             for (OptionsBean answers:eventBeanList.get(indexPos).getOptions()) {
                 selectOneanswerOptions(answers.getId(),answers.getValue());
             }
+            selectedAnswerQidAnsId(eventBeanList.get(i).getQid(),eventBeanList.get(i).getOptions().get(i).getId(),
+                    eventBeanList.get(i).getOptions().get(i).getId());
         }else if("TrueOrFalse".equalsIgnoreCase(quizType)){
             for (OptionsBean answers:eventBeanList.get(indexPos).getOptions()) {
                 trueFalseanswerOptions(answers.getId(),answers.getValue());
             }
         }
     }catch (Exception e){
-e.printStackTrace();
+      e.printStackTrace();
     }
 
 }

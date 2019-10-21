@@ -134,6 +134,7 @@ public class VcornerActivity extends AppCompatActivity {
                     }
 
 
+
                     if(1 == response.body().getTopThreePerformers().get(0).getRank()){
                         tvfirstname.setText(response.body().getTopThreePerformers().get(0).getName());
                         if(!response.body().getTopThreePerformers().get(0).getImage().isEmpty()){
