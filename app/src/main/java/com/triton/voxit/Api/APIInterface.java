@@ -29,12 +29,11 @@ import com.triton.voxit.model.SingupData;
 import com.triton.voxit.model.TopThreeRequest;
 import com.triton.voxit.model.UpdatereferalRequest;
 import com.triton.voxit.model.UserLogResponse;
-import com.triton.voxit.requestpojo.CreateQuizMappingRequest;
+import com.triton.voxit.requestpojo.CreateQuizAnswersRequest;
 import com.triton.voxit.requestpojo.UpdateJockeyProfilePicRequest;
-import com.triton.voxit.responsepojo.CreateQuizMappingResponse;
+import com.triton.voxit.responsepojo.CreateQuizAnswersResponse;
 import com.triton.voxit.responsepojo.ImageFileUploadResponse;
 import com.triton.voxit.responsepojo.UpdateJockeyProfilePicResponse;
-import com.triton.voxit.responsepojo.VCornerQuestionsResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -173,8 +172,8 @@ public interface APIInterface {
     @GET("vCornerQuestions")
     Call<TopThreeRequest> getVCornerQuestionsResponseCall(@Header("Content-Type") String type);
 
-    @POST("createQuizMapping")
-    Call<CreateQuizMappingResponse> createQuizMappingResponseCall(@Header("Content-Type") String type, @Body CreateQuizMappingRequest createQuizMappingRequest);
+    @POST("createQuizAnswers")
+    Call<CreateQuizAnswersResponse> createQuizMappingResponseCall(@Header("Content-Type") String type, @Body CreateQuizAnswersRequest createQuizMappingRequest);
 
 
     @POST("updateJockeyProfilePic")

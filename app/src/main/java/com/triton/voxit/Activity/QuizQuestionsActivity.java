@@ -1,5 +1,9 @@
 package com.triton.voxit.Activity;
 
+import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,11 +11,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.triton.voxit.Adapter.ViewPagerQuizAdapter;
 import com.triton.voxit.R;
+import com.triton.voxit.Service.MediaPlayerService;
+import com.triton.voxit.Utlity.MediaPlayerSingleton;
 import com.triton.voxit.model.EventBean;
 import com.triton.voxit.model.OptionsBean;
 import com.triton.voxit.model.ResponseBean;
@@ -19,6 +31,7 @@ import com.triton.voxit.responsepojo.VCornerQuestionsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class QuizQuestionsActivity extends AppCompatActivity implements View.OnClickListener {
    // public static VCornerQuestionsResponse.ResponseBean responseBean;
@@ -55,6 +68,33 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
 
     TextView tvToolbarTittle;
 
+    MediaPlayerSingleton mps;
+    private RelativeLayout miniPlayerLayout;
+    private ImageView imgClose, imgSong;
+    private TextView txtSongName, txtAuthorName, txtTypeName;
+    ImageView searchImg, imgMiniPlay;
+
+    LinearLayout ll_AudioPlay;
+
+    Boolean isAudioClick = false;
+
+
+
+    private long timeCountInMilliSeconds = 1 * 60000;
+
+    private enum TimerStatus {
+        STARTED,
+        STOPPED
+    }
+
+    private TimerStatus timerStatus = TimerStatus.STOPPED;
+
+    private ProgressBar progressBarCircle;
+    private EditText editTextMinute;
+    private TextView textViewTime;
+    private ImageView imageViewReset;
+    private ImageView imageViewStartStop;
+    private CountDownTimer countDownTimer;
 
 
     @Override
@@ -63,6 +103,17 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         setContentView(R.layout.activity_quiz_questions);
 
         tvToolbarTittle = (TextView)findViewById(R.id.toolbar_title);
+        miniPlayerLayout = (RelativeLayout) findViewById(R.id.miniPlayerLayout);
+        imgClose = (ImageView) findViewById(R.id.imgClose);
+        imgMiniPlay = (ImageView) findViewById(R.id.imgMiniPlay);
+        txtSongName = (TextView) findViewById(R.id.txtSongName);
+        txtSongName.setSelected(true);
+        txtTypeName = (TextView) findViewById(R.id.typeName);
+        imgSong = (ImageView) findViewById(R.id.imgSong);
+        txtAuthorName = (TextView) findViewById(R.id.txtAuthorName);
+
+        ll_AudioPlay = (LinearLayout)findViewById(R.id.llAudioPlay);
+        ll_AudioPlay.setOnClickListener(this);
 
         tvQuestions = (TextView)findViewById(R.id.tvquestions);
         tvAns1 = (TextView)findViewById(R.id.tvAns1);
@@ -79,7 +130,17 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         btnNext.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
 
+        mps = MediaPlayerSingleton.getInstance(this);
 
+
+        /*Timer*/
+        progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
+        editTextMinute = (EditText) findViewById(R.id.editTextMinute);
+        textViewTime = (TextView) findViewById(R.id.textViewTime);
+        //imageViewReset = (ImageView) findViewById(R.id.imageViewReset);
+       // imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
+
+        startStop();
 
         Bundle bundle = getIntent().getExtras();
         EventType = bundle.getString("EVENT");
@@ -147,21 +208,28 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
             }
             Log.i("EventBeanListSize","-->"+eventBeanList);
             for(int i=0; i<eventBeanList.size();i++){
-                tvQuestions.setText(eventBeanList.get(i).getQid()+".)"+eventBeanList.get(i).getTitle());
+                tvQuestions.setText(eventBeanList.get(i).getQid()+"."+eventBeanList.get(i).getTitle());
                 String quizType=eventBeanList.get(i).getQuizType();
+
+               /*if(isAudioClick){
+                    playSongs(eventBeanList.get(i).getAudio_path(),eventBeanList.get(i).getAudio_id(),i);
+                }*/
+
                 if("SelectOne".equalsIgnoreCase(quizType)){
                     for (OptionsBean answers:eventBeanList.get(i).getOptions()) {
                         selectOneanswerOptions(answers.getId(),answers.getValue());
 
                     }
-                    selectedAnswerQidAnsId(eventBeanList.get(i).getQid(),eventBeanList.get(i).getOptions().get(i).getId(),
-                            eventBeanList.get(i).getOptions().get(i).getId());
 
+                    tvAns3.setVisibility(View.VISIBLE);
+                    tvAns4.setVisibility(View.VISIBLE);
 
                 }else if("TrueOrFalse".equalsIgnoreCase(quizType)){
                     for (OptionsBean answers:eventBeanList.get(i).getOptions()) {
                         trueFalseanswerOptions(answers.getId(),answers.getValue());
                     }
+                    tvAns3.setVisibility(View.INVISIBLE);
+                    tvAns4.setVisibility(View.INVISIBLE);
                 }
                 count=0;
                 break;
@@ -173,35 +241,48 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         }
         }
 
+
+
     private void selectedAnswerQidAnsId(int qid, int id, int ans) {
         tvAns1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
+                tvAns1.setBackgroundResource(R.drawable.textview_bg_change);
+                tvAns2.setBackgroundResource(R.drawable.textview_bg);
+                tvAns3.setBackgroundResource(R.drawable.textview_bg);
+                tvAns4.setBackgroundResource(R.drawable.textview_bg);
+
+
             }
         });
         tvAns2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
-
+                tvAns1.setBackgroundResource(R.drawable.textview_bg);
+                tvAns2.setBackgroundResource(R.drawable.textview_bg_change);
+                tvAns3.setBackgroundResource(R.drawable.textview_bg);
+                tvAns4.setBackgroundResource(R.drawable.textview_bg);
 
             }
         });
         tvAns3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
 
-
+                tvAns1.setBackgroundResource(R.drawable.textview_bg);
+                tvAns2.setBackgroundResource(R.drawable.textview_bg);
+                tvAns3.setBackgroundResource(R.drawable.textview_bg_change);
+                tvAns4.setBackgroundResource(R.drawable.textview_bg);
             }
         });
         tvAns4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(QuizQuestionsActivity.this, "QidAns"+qid+ans, Toast.LENGTH_SHORT).show();
 
-
+                tvAns1.setBackgroundResource(R.drawable.textview_bg);
+                tvAns2.setBackgroundResource(R.drawable.textview_bg);
+                tvAns3.setBackgroundResource(R.drawable.textview_bg);
+                tvAns4.setBackgroundResource(R.drawable.textview_bg_change);
             }
         });
     }
@@ -233,10 +314,10 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
                 tvAns2.setText(answer);
                 break;
             case 3:
-                tvAns3.setVisibility(View.INVISIBLE);
+                tvAns3.setVisibility(View.GONE);
                 break;
             case 4:
-                tvAns4.setVisibility(View.INVISIBLE);
+                tvAns4.setVisibility(View.GONE);
                 break;
 
         }
@@ -269,10 +350,16 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
             case R.id.btnNext:
                 nextBtn();
                 break;
+            case R.id.llAudioPlay:
+                isAudioClick = true;
+                break;
 
         }
 
     }
+
+
+
 
     private void previousBtn() {
         if(count>0){
@@ -303,24 +390,30 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         checkNextEnableOrNot();
     }
 
-
-private void getCurrentQuestion(Integer i){
+    private void getCurrentQuestion(Integer i){
     try{
         Integer indexPos=i;
         Log.i("eventBeanList",""+indexPos);
         Log.i("eventBeanList",""+eventBeanList.get(indexPos));
         tvQuestions.setText(eventBeanList.get(indexPos).getQid()+"."+eventBeanList.get(indexPos).getTitle());
         String quizType=eventBeanList.get(indexPos).getQuizType();
+
+        /*if(isAudioClick){
+            playSongs(eventBeanList.get(i).getAudio_path(),eventBeanList.get(i).getAudio_id(),i);
+        }*/
         if("SelectOne".equalsIgnoreCase(quizType)){
             for (OptionsBean answers:eventBeanList.get(indexPos).getOptions()) {
                 selectOneanswerOptions(answers.getId(),answers.getValue());
             }
-            selectedAnswerQidAnsId(eventBeanList.get(i).getQid(),eventBeanList.get(i).getOptions().get(i).getId(),
-                    eventBeanList.get(i).getOptions().get(i).getId());
+
+            tvAns3.setVisibility(View.VISIBLE);
+            tvAns4.setVisibility(View.VISIBLE);
         }else if("TrueOrFalse".equalsIgnoreCase(quizType)){
             for (OptionsBean answers:eventBeanList.get(indexPos).getOptions()) {
                 trueFalseanswerOptions(answers.getId(),answers.getValue());
             }
+            tvAns3.setVisibility(View.INVISIBLE);
+            tvAns4.setVisibility(View.INVISIBLE);
         }
     }catch (Exception e){
       e.printStackTrace();
@@ -328,4 +421,271 @@ private void getCurrentQuestion(Integer i){
 
 }
 
+    private void playSongs(String audio_path, String audio_id, Integer i) {
+        playSong(audio_path,audio_id,i);
+    }
+
+
+    public void playSong(String audioUrl,String audioid,int songIndex) {
+        try {
+
+            setCurrentPlayPos(songIndex);
+            // if (!isPlaying) {
+            //  mps.releasePlayer();
+
+            if (mps.mp != null) {
+                mps.mp.pause();
+//                mps.mp.reset();
+                //   mps.mp.release();
+
+                mps.mp = null;
+            }
+            // player = new MediaPlayer();
+            mps.initializePlayer();
+            mps.mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mps.mp.setDataSource(audioUrl);
+
+            //desTv.setText("By"+" "+audiosongsList.get(songIndex).getName());
+
+            mps.mp.prepare();
+            mps.mp.start();
+
+            if (!miniPlayerLayout.isShown()) {
+                // miniPlayerLayout.setEnabled(false);
+                miniPlayerLayout.setVisibility(View.VISIBLE);
+            }
+
+
+
+            buildNotification(MediaPlayerService.ACTION_PLAY);
+
+            setStatus("playing");
+
+            int duration = mps.mp.getDuration();
+            duration = duration / 1000;
+
+            Log.e( "duration " ,""+ duration);
+
+            //seekBar.setMax(duration);
+
+      /*      this.runOnUiThread(updateRunnable = new Runnable() {
+                @Override
+                public void run() {
+
+                    if (mps.mp != null) {
+                        seekbarPosition = mps.mp.getCurrentPosition() / 1000;
+                        seekBar.setProgress(seekbarPosition);
+
+                        // Displaying time completed playing
+                        end_time.setText("" + utils.milliSecondsToTimer(mps.mp.getDuration()));
+//                            int percentage = (100 * player.getCurrentPosition()) / songDuration;
+                        start_time.setText("" + utils.milliSecondsToTimer(mps.mp.getCurrentPosition()));
+
+                    }
+                    mHandler.postDelayed(this, 1000);
+                }
+            });
+*/
+            mps.mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    Log.e( "TAG:prepared " ,""+ mp.getDuration());
+                }
+            });
+
+            mps.mp.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+                @Override
+                public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                    Log.d("TAG:buffering " , mp.getDuration() + " percent " + percent);
+
+                    if (mps.mp != null) {
+
+
+                    }
+                }
+            });
+
+            //Attempt to seek to past end of file: request = 259000, durationMs = 0
+            mps.mp.setOnInfoListener(new MediaPlayer.OnInfoListener() {
+                @Override
+                public boolean onInfo(MediaPlayer mp, int what, int extra) {
+                    switch (what) {
+                        case MediaPlayer.MEDIA_INFO_BUFFERING_START:
+                            break;
+                        case MediaPlayer.MEDIA_INFO_BUFFERING_END:
+
+                            int duration = mps.mp.getDuration();
+
+                            duration = duration / 1000;
+                            //seekBar.setMax(duration);
+                            break;
+                    }
+                    return false;
+                }
+            });
+//                Log.w("Duartion ", duration + "");
+
+            mps.mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // imgMiniPlay.setImageResource(R.drawable.play_blue);
+
+                    if (mps.mp != null) {
+                        setStatus("completed");
+                        imgMiniPlay.setImageResource(R.drawable.pause_blue);
+                        // playMethod(songIndex + 1);
+
+                        //  playNextSong();
+
+
+                    }
+
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void setCurrentPlayPos(int pos) {
+        mps.setCurrentPlayPos(pos);
+    }
+    private void setStatus(String status) {
+
+        mps.setMediaPlayerStatus(status);
+    }
+    private void buildNotification(String action) {
+        Intent intent = new Intent(getApplicationContext(), MediaPlayerService.class);
+        intent.setAction(action);
+        startService(intent);
+    }
+
+
+    /**
+     * method to start and stop count down timer
+     */
+    private void startStop() {
+        if (timerStatus == TimerStatus.STOPPED) {
+
+            // call to initialize the timer values
+            setTimerValues();
+            // call to initialize the progress bar values
+            setProgressBarValues();
+            // showing the reset icon
+            // imageViewReset.setVisibility(View.VISIBLE);
+            // changing play icon to stop icon
+            // imageViewStartStop.setImageResource(R.drawable.icon_stop);
+            // making edit text not editable
+            editTextMinute.setEnabled(false);
+            // changing the timer status to started
+            timerStatus = TimerStatus.STARTED;
+            // call to start the count down timer
+            startCountDownTimer();
+
+        } else {
+
+            // hiding the reset icon
+            // imageViewReset.setVisibility(View.GONE);
+            // changing stop icon to start icon
+            //imageViewStartStop.setImageResource(R.drawable.icon_start);
+            // making edit text editable
+            editTextMinute.setEnabled(true);
+            // changing the timer status to stopped
+            timerStatus = TimerStatus.STOPPED;
+            stopCountDownTimer();
+
+        }
+
+    }
+
+    /**
+     * method to initialize the values for count down timer
+     */
+    private void setTimerValues() {
+        int time = 0;
+        if (!editTextMinute.getText().toString().isEmpty()) {
+            // fetching value from edit text and type cast to integer
+            time = Integer.parseInt(editTextMinute.getText().toString().trim());
+        } else {
+            // toast message to fill edit text
+            Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
+        }
+        // assigning values after converting to milliseconds
+        timeCountInMilliSeconds = time * 60 * 1000;
+    }
+
+    /**
+     * method to start count down timer
+     */
+    private void startCountDownTimer() {
+
+        countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
+
+                progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
+                // call to initialize the progress bar values
+                setProgressBarValues();
+                // hiding the reset icon
+                // imageViewReset.setVisibility(View.GONE);
+                // changing stop icon to start icon
+                //   imageViewStartStop.setImageResource(R.drawable.icon_start);
+                // making edit text editable
+                editTextMinute.setEnabled(true);
+                // changing the timer status to stopped
+                timerStatus = TimerStatus.STOPPED;
+            }
+
+        }.start();
+        countDownTimer.start();
+    }
+
+    /**
+     * method to stop count down timer
+     */
+    private void stopCountDownTimer() {
+        countDownTimer.cancel();
+    }
+
+    /**
+     * method to set circular progress bar values
+     */
+    private void setProgressBarValues() {
+
+        progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
+        progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
+    }
+
+
+    /**
+     * method to convert millisecond to time format
+     *
+     * @param milliSeconds
+     * @return HH:mm:ss time formatted string
+     */
+    private String hmsTimeFormatter(long milliSeconds) {
+
+        String hms = String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(milliSeconds),
+                TimeUnit.MILLISECONDS.toMinutes(milliSeconds) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(milliSeconds)),
+                TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
+
+        return hms;
+
+
+    }
+
+
+
+
 }
+
