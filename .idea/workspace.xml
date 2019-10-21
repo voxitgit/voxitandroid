@@ -30,57 +30,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/Dashboard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2066">
-              <caret line="471" column="46" lean-forward="true" selection-start-line="471" selection-start-column="46" selection-end-line="471" selection-end-column="46" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#10438#10683#0" />
-                <element signature="e#11110#11198#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/QuizQuestionsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="162" lean-forward="true" selection-start-line="162" selection-end-line="162" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#8335#10181#0" />
-                <element signature="e#10625#11075#0" />
-                <element signature="e#11081#11282#0" />
-                <element signature="e#11288#11553#0" />
-                <element signature="e#11928#12270#0" />
-                <element signature="e#12276#12665#0" />
-                <element signature="e#12671#13897#0" />
-                <element signature="e#13903#14021#0" />
-                <element signature="e#14028#18113#0" />
-                <element signature="e#19500#20778#0" />
-                <element signature="e#21238#21273#0" expanded="true" />
-                <element signature="e#21441#22616#0" />
-                <element signature="e#22757#23016#0" />
-                <element signature="e#23023#23642#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_quiz_questions.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/VcornerDashboardAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="284" column="43" selection-start-line="284" selection-start-column="43" selection-end-line="284" selection-end-column="43" />
+            <state relative-caret-position="336">
+              <caret line="121" column="69" lean-forward="true" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
               <folding>
-                <element signature="e#681#1558#0" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -152,7 +111,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/QuestionsandAnswerResponse.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/TopThreePerformers.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/TopThreeRequest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/ResponseBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/responsepojo/TEstpojio.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/responsepojo/VCornerQuestionsResponse.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/quiz_page_adapter.xml" />
@@ -163,17 +121,13 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventSubYuvi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventYuvi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/MainYuvi.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/VcornerDashboardAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/toolbar_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/navigation_menu_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/NavigationDrawer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/GenreActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/requestpojo/CreateQuizMappingRequest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/responsepojo/CreateQuizMappingResponse.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/OptionsBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/VcornerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_vcorner.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/textview_bg_change.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/requestpojo/CreateQuizAnswersRequest.java" />
@@ -185,10 +139,15 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Api/APIInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_quiz_questions.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/ResponseBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/VcornerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/VcornerDashboardAdapter.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="210" />
     <option name="y" value="125" />
     <option name="width" value="1440" />
@@ -418,7 +377,7 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="right" id="Preview" order="4" visible="true" weight="0.30402684" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.30402684" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
     <layout-to-restore>
@@ -448,6 +407,18 @@
       <window_info anchor="right" id="Preview" order="4" weight="0.15369128" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/VcornerActivity.java</url>
+          <line>178</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -499,78 +470,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/ResponseBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#413#414#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#537#538#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
-            <element signature="e#605#606#0" expanded="true" />
-            <element signature="e#655#656#0" expanded="true" />
-            <element signature="e#697#698#0" expanded="true" />
-            <element signature="e#733#734#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-            <element signature="e#815#816#0" expanded="true" />
-            <element signature="e#857#858#0" expanded="true" />
-            <element signature="e#893#894#0" expanded="true" />
-            <element signature="e#925#926#0" expanded="true" />
-            <element signature="e#975#976#0" expanded="true" />
-            <element signature="e#1017#1018#0" expanded="true" />
-            <element signature="e#1053#1054#0" expanded="true" />
-            <element signature="e#1085#1086#0" expanded="true" />
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1177#1178#0" expanded="true" />
-            <element signature="e#1210#1211#0" expanded="true" />
-            <element signature="e#1239#1240#0" expanded="true" />
-            <element signature="e#1283#1284#0" expanded="true" />
-            <element signature="e#1319#1320#0" expanded="true" />
-            <element signature="e#1353#1354#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#1429#1430#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1501#1502#0" expanded="true" />
-            <element signature="e#1531#1532#0" expanded="true" />
-            <element signature="e#1577#1578#0" expanded="true" />
-            <element signature="e#1615#1616#0" expanded="true" />
-            <element signature="e#1646#1647#0" expanded="true" />
-            <element signature="e#1673#1674#0" expanded="true" />
-            <element signature="e#1713#1714#0" expanded="true" />
-            <element signature="e#1745#1746#0" expanded="true" />
-            <element signature="e#1778#1779#0" expanded="true" />
-            <element signature="e#1809#1810#0" expanded="true" />
-            <element signature="e#1854#1855#0" expanded="true" />
-            <element signature="e#1887#1888#0" expanded="true" />
-            <element signature="e#1933#1934#0" expanded="true" />
-            <element signature="e#1961#1962#0" expanded="true" />
-            <element signature="e#2017#2018#0" expanded="true" />
-            <element signature="e#2046#2047#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/quiz_page_adapter.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="161" column="19" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="161" selection-end-column="19" />
-          <folding>
-            <element signature="e#401#3737#0" />
-            <element signature="e#3743#4965#0" />
-            <element signature="e#4971#5624#0" />
-            <element signature="e#5630#6142#0" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/ViewPagerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="634">
@@ -860,13 +759,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/TopThreePerformers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -889,20 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1245#1246#0" expanded="true" />
-            <element signature="e#1275#1276#0" expanded="true" />
-            <element signature="e#1337#1338#0" expanded="true" />
-            <element signature="e#1375#1376#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_vcorner.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -913,23 +791,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/rounded_corner_layout_bg.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/VcornerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="74" column="38" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/VcornerDashboardAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="125" column="35" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/textview_bg_change.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1066,18 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/Dashboard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2066">
-          <caret line="471" column="46" lean-forward="true" selection-start-line="471" selection-start-column="46" selection-end-line="471" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#10438#10683#0" />
-            <element signature="e#11110#11198#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1095,40 +944,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/QuizQuestionsActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="162" lean-forward="true" selection-start-line="162" selection-end-line="162" />
+        <state relative-caret-position="542">
+          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/EventBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="56" column="25" lean-forward="true" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8335#10181#0" />
-            <element signature="e#10625#11075#0" />
-            <element signature="e#11081#11282#0" />
-            <element signature="e#11288#11553#0" />
-            <element signature="e#11928#12270#0" />
-            <element signature="e#12276#12665#0" />
-            <element signature="e#12671#13897#0" />
-            <element signature="e#13903#14021#0" />
-            <element signature="e#14028#18113#0" />
-            <element signature="e#19500#20778#0" />
-            <element signature="e#21238#21273#0" expanded="true" />
-            <element signature="e#21441#22616#0" />
-            <element signature="e#22757#23016#0" />
-            <element signature="e#23023#23642#0" />
+            <element signature="e#1245#1246#0" expanded="true" />
+            <element signature="e#1275#1276#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1375#1376#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/model/ResponseBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_quiz_questions.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="284" column="43" selection-start-line="284" selection-start-column="43" selection-end-line="284" selection-end-column="43" />
+        <state relative-caret-position="210">
+          <caret line="281" column="12" selection-start-line="281" selection-start-column="12" selection-end-line="281" selection-end-column="12" />
           <folding>
             <element signature="e#681#1558#0" />
           </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.3.0/76f3c69879d3e01c082f49d8661c5590838148e1/retrofit-2.3.0-sources.jar!/retrofit2/ExecutorCallAdapterFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="e#2141#2573#0" expanded="true" />
+            <element signature="e#2572#2573#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/Dashboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2066">
+          <caret line="471" column="46" lean-forward="true" selection-start-line="471" selection-start-column="46" selection-end-line="471" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10438#10683#0" />
+            <element signature="e#11110#11198#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/VcornerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="127" column="41" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Activity/QuizQuestionsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/triton/voxit/Adapter/VcornerDashboardAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="121" column="69" lean-forward="true" selection-start-line="121" selection-start-column="69" selection-end-line="121" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

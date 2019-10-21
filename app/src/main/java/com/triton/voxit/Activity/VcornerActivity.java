@@ -107,6 +107,7 @@ public class VcornerActivity extends AppCompatActivity {
 
 
     private void getVCornerQuestionsResponse() {
+
         progressBar.setVisibility(View.VISIBLE);
         APIInterface ApiService = APIClient.getClient().create(APIInterface.class);
         Call<TopThreeRequest> call = ApiService.getVCornerQuestionsResponseCall(RestUtils.getContentType());

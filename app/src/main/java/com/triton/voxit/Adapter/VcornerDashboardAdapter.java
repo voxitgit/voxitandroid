@@ -46,7 +46,6 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     private Context context;
 
 
-    ArrayList<VCornerQuestionsResponse> arrayList = null;
 
     private OnLoadMoreListener mOnLoadMoreListener;
 
@@ -120,7 +119,8 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
         //QuizQuestionsActivity.responseBean = responseBeanList.get(position);
         for (int i = 0; i < responseBeanArrayList.size(); i++) {
             // EventType = currentItem.getEventType();
-            holder.txt_eventtype.setText(currentItem.getEventType());
+            holder.txt_eventtype.setText(currentItem.getEventName());
+            holder.txt_endsin.setText("Ends in:"+currentItem.getEnds());
             String startDate = currentItem.getStarts();
             String endDate = currentItem.getEnds();
             getCalculateTimes(endDate);
@@ -132,7 +132,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
                  Log.i("startDate",startDate);
                  Toast.makeText(context, "Selected row!"+startDate,
                          Toast.LENGTH_LONG).show();
-                 holder.txt_endsin.setText(strMsg+" "+strMSgdaystime+" "+elapsedHours+":"+elapsedMinutes+":"+elapsedSeconds);
+               // holder.txt_endsin.setText(strMsg+" "+strMSgdaystime+" "+elapsedHours+":"+elapsedMinutes+":"+elapsedSeconds);
 
              }
             Log.i("STARTEND","Start"+startDate+"End"+endDate  );
