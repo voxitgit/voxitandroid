@@ -133,15 +133,16 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         tvQuestions = (TextView)findViewById(R.id.tvquestions);
         tvAns1 = (TextView)findViewById(R.id.tvAns1);
         tvAns2 = (TextView)findViewById(R.id.tvAns2);
-
-
-
-
         tvAns3 = (TextView)findViewById(R.id.tvAns3);
         tvAns4 = (TextView)findViewById(R.id.tvAns4);
         btnNext = (Button)findViewById(R.id.btnNext);
         btnPrevious = (Button)findViewById(R.id.btnPrevious);
         btnSubmit = (Button)findViewById(R.id.btnSubmit);
+
+        tvAns1.setOnClickListener(this);
+        tvAns2.setOnClickListener(this);
+        tvAns3.setOnClickListener(this);
+        tvAns4.setOnClickListener(this);
 
         btnNext.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
@@ -260,7 +261,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
 
 
 
-    private void selectedAnswerQidAnsId(int qid, int id, int ans) {
+    private void selectedAnswerQidAnsId(int qid, int id, int value) {
         tvAns1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -373,6 +374,15 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
                // isAudioClick = true;
                 break;
 
+            case R.id.tvAns1:
+                break;
+            case R.id.tvAns2:
+                break;
+            case R.id.tvAns3:
+                break;
+            case R.id.tvAns4:
+                break;
+
             case R.id.btnSubmit:
 
                 break;
@@ -428,6 +438,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         if("SelectOne".equalsIgnoreCase(quizType)){
             for (OptionsBean answers:eventBeanList.get(indexPos).getOptions()) {
                 selectOneanswerOptions(answers.getId(),answers.getValue());
+
             }
 
             tvAns3.setVisibility(View.VISIBLE);
