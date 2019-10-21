@@ -75,7 +75,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
 
 
 
-   String EventType;
+   String EventType,EventTime;
 
    private List<EventBean> eventBeanList=new ArrayList<>();
 
@@ -134,9 +134,6 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         tvAns1 = (TextView)findViewById(R.id.tvAns1);
         tvAns2 = (TextView)findViewById(R.id.tvAns2);
 
-
-
-
         tvAns3 = (TextView)findViewById(R.id.tvAns3);
         tvAns4 = (TextView)findViewById(R.id.tvAns4);
         btnNext = (Button)findViewById(R.id.btnNext);
@@ -161,6 +158,10 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
 
         Bundle bundle = getIntent().getExtras();
         EventType = bundle.getString("EVENT");
+        EventTime = bundle.getString("EVENTTIME");
+
+
+
         Log.i("EventType-->",EventType);
 
         //  mPager = (ViewPager) findViewById(R.id.viewpagerQuesAns);
@@ -626,7 +627,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
      * method to initialize the values for count down timer
      */
     private void setTimerValues() {
-        int time = 0;
+        int time = Integer.parseInt(EventTime);
         if (!editTextMinute.getText().toString().isEmpty()) {
             // fetching value from edit text and type cast to integer
             time = Integer.parseInt(editTextMinute.getText().toString().trim());

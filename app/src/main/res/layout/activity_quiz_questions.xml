@@ -256,17 +256,22 @@
                 android:layout_height="wrap_content"
                 android:text="Next"
                 android:textAllCaps="false"
-                android:drawableRight="@drawable/next_gray"/>
+                android:drawableRight="@drawable/next_gray"
+               />
             <Button
                 android:layout_alignParentRight="true"
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:background="@color/voxitcolor"
                 android:textAllCaps="false"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+
+
+
+                />
 
         </RelativeLayout>
 
