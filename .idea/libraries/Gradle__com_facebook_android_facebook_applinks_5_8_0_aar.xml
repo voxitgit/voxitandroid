@@ -1,12 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.facebook.android:facebook-applinks:5.8.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ec8e26e0e18d1df4b36aae7866e49b4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ec8e26e0e18d1df4b36aae7866e49b4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3f0c9336c19454b782f9ccd6215a5f3d/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3f0c9336c19454b782f9ccd6215a5f3d/jars/classes.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.android/facebook-applinks/5.8.0/7f5dea596dee4b0efd4b23a4a5631ef1a89c49dc/facebook-applinks-5.8.0-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.android/facebook-applinks/5.8.0/b2a039b6c0d64041a9b54052405ee5c1a3867f5a/facebook-applinks-5.8.0-sources.jar!/" />
     </SOURCES>
