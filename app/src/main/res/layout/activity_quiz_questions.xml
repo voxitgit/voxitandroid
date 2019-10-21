@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".Activity.QuizQuestionsActivity"
     android:background="@drawable/vcorner_bg">
+    <ProgressBar
+        android:id="@+id/progressBarQustionsandAnswer"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:indeterminateTint="@color/blue"
+        android:visibility="gone"/>
     <LinearLayout
         android:id="@+id/headerView"
         android:layout_width="match_parent"
@@ -31,7 +40,6 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
                 android:gravity="center_vertical"
                 android:text="Quiz"
                 android:textColor="#3E5362"
@@ -249,6 +257,16 @@
                 android:text="Next"
                 android:textAllCaps="false"
                 android:drawableRight="@drawable/next_gray"/>
+            <Button
+                android:layout_alignParentRight="true"
+                android:id="@+id/btnSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:background="@color/voxitcolor"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
         </RelativeLayout>
 

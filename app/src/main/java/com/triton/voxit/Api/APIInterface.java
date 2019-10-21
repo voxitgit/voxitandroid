@@ -173,7 +173,7 @@ public interface APIInterface {
     Call<TopThreeRequest> getVCornerQuestionsResponseCall(@Header("Content-Type") String type);
 
     @POST("createQuizAnswers")
-    Call<CreateQuizAnswersResponse> createQuizMappingResponseCall(@Header("Content-Type") String type, @Body CreateQuizAnswersRequest createQuizMappingRequest);
+    Call<CreateQuizAnswersResponse> CreateQuizAnswersResponseCall(@Header("Content-Type") String type, @Body CreateQuizAnswersRequest createQuizMappingRequest);
 
 
     @POST("updateJockeyProfilePic")

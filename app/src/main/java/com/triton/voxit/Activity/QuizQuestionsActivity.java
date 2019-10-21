@@ -20,18 +20,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.triton.voxit.Adapter.ViewPagerQuizAdapter;
+import com.triton.voxit.Api.APIClient;
+import com.triton.voxit.Api.APIInterface;
 import com.triton.voxit.R;
 import com.triton.voxit.Service.MediaPlayerService;
 import com.triton.voxit.Utlity.MediaPlayerSingleton;
+import com.triton.voxit.apputils.RestUtils;
 import com.triton.voxit.model.EventBean;
 import com.triton.voxit.model.OptionsBean;
 import com.triton.voxit.model.ResponseBean;
+import com.triton.voxit.requestpojo.CreateQuizAnswersRequest;
+import com.triton.voxit.responsepojo.CreateQuizAnswersResponse;
 import com.triton.voxit.responsepojo.VCornerQuestionsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class QuizQuestionsActivity extends AppCompatActivity implements View.OnClickListener {
    // public static VCornerQuestionsResponse.ResponseBean responseBean;
@@ -46,8 +56,11 @@ public class QuizQuestionsActivity extends AppCompatActivity implements View.OnC
    // ViewPagerQuizAdapter viewPagerQuizAdapter;
   //  private  ViewPager mPager;
 
+    private List<CreateQuizAnswersRequest.AnswerBean> answerBeanList;
+    CreateQuizAnswersRequest.AnswerBean answerBean = new CreateQuizAnswersRequest.AnswerBean();
+
 private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
-  private   Button btnNext, btnPrevious;
+  private   Button btnNext, btnPrevious,btnSubmit;
 
     private int Qid;
     private String title;
@@ -67,7 +80,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
    private List<EventBean> eventBeanList=new ArrayList<>();
 
     TextView tvToolbarTittle;
-
+    private ProgressBar progressBar;
     MediaPlayerSingleton mps;
     private RelativeLayout miniPlayerLayout;
     private ImageView imgClose, imgSong;
@@ -102,6 +115,8 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_questions);
 
+        progressBar = (ProgressBar)findViewById(R.id.progressBarQustionsandAnswer);
+
         tvToolbarTittle = (TextView)findViewById(R.id.toolbar_title);
         miniPlayerLayout = (RelativeLayout) findViewById(R.id.miniPlayerLayout);
         imgClose = (ImageView) findViewById(R.id.imgClose);
@@ -126,9 +141,11 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         tvAns4 = (TextView)findViewById(R.id.tvAns4);
         btnNext = (Button)findViewById(R.id.btnNext);
         btnPrevious = (Button)findViewById(R.id.btnPrevious);
+        btnSubmit = (Button)findViewById(R.id.btnSubmit);
 
         btnNext.setOnClickListener(this);
         btnPrevious.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
 
         mps = MediaPlayerSingleton.getInstance(this);
 
@@ -336,8 +353,10 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         Log.i("count--",""+count+" "+eventBeanList.size());
         if((count+1)==eventBeanList.size()){
             btnNext.setVisibility(View.INVISIBLE);
+            btnSubmit.setVisibility(View.VISIBLE);
         }else{
-     btnNext.setVisibility(View.VISIBLE);
+           btnNext.setVisibility(View.VISIBLE);
+           btnSubmit.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -351,7 +370,11 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
                 nextBtn();
                 break;
             case R.id.llAudioPlay:
-                isAudioClick = true;
+               // isAudioClick = true;
+                break;
+
+            case R.id.btnSubmit:
+
                 break;
 
         }
@@ -397,6 +420,7 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         Log.i("eventBeanList",""+eventBeanList.get(indexPos));
         tvQuestions.setText(eventBeanList.get(indexPos).getQid()+"."+eventBeanList.get(indexPos).getTitle());
         String quizType=eventBeanList.get(indexPos).getQuizType();
+
 
         /*if(isAudioClick){
             playSongs(eventBeanList.get(i).getAudio_path(),eventBeanList.get(i).getAudio_id(),i);
@@ -682,6 +706,51 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         return hms;
 
 
+    }
+
+    private void createQuizMappingResponseCall() {
+        progressBar.setVisibility(View.VISIBLE);
+
+        APIInterface ApiService = APIClient.getClient().create(APIInterface.class);
+        Call<CreateQuizAnswersResponse> call = ApiService.CreateQuizAnswersResponseCall(RestUtils.getContentType(), createQuizAnswersRequest());
+        call.enqueue(new Callback<CreateQuizAnswersResponse>() {
+            @Override
+            public void onResponse(Call<CreateQuizAnswersResponse> call, Response<CreateQuizAnswersResponse> response) {
+               // avi_indicator.smoothToHide();
+                Log.e("LoginRes", "--->" + new Gson().toJson(response.body()));
+                progressBar.setVisibility(View.INVISIBLE);
+
+                if(200 == response.body().getCode()){
+
+
+
+
+
+
+
+
+                }else{
+                    //Toasty.error(getApplicationContext(), Message, Toast.LENGTH_SHORT, true).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CreateQuizAnswersResponse> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Log.e("LoginResFlr", "--->" + t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    private CreateQuizAnswersRequest createQuizAnswersRequest() {
+        CreateQuizAnswersRequest createQuizAnswersRequest = new CreateQuizAnswersRequest();
+
+        createQuizAnswersRequest.setAnswer(answerBeanList);
+
+        Log.i("LoginReq", "--->" + new Gson().toJson(createQuizAnswersRequest));
+        return createQuizAnswersRequest;
     }
 
 

@@ -69,5 +69,5 @@
 
     <string name="message_minutes">Please Enter Minutes...</string>
 
-    <string name="questionsandanswer">You can also listen to the audio "\n" here below for answering "\n"the question.</string>
+    <string name="questionsandanswer">You can also listen to the audio here below "\n" for answering the question.</string>
 </resources>
