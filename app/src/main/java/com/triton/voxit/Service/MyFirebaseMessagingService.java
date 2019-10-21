@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
@@ -38,11 +39,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
     private static final String PREFERENCES = "";
     SessionManager session;
-    private  String CHANNEL_ID = "MyApp";
+    private String CHANNEL_ID = "MyApp";
     public static final String PREFS_NAME = "MyPrefsFile";
     boolean hasLoggedIn;
     SharedPreferences.Editor editor;
-    String title,message,click_action;
+    String title, message, click_action;
     private boolean isLogged;
 
     int notification_id = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
@@ -65,7 +66,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //
 //
 //        session.checkLogin();
-       // session.checkLogin();
+        // session.checkLogin();
 
 //        if (session.isLoggedIn()) {
 
@@ -74,46 +75,62 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        hasLoggedIn = settings1.getBoolean("hasLoggedIn", false);
 
 
-            // Check if message contains a data payload.
-            if (remoteMessage.getData().size() > 0) {
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
 
-                JSONObject data = new JSONObject(remoteMessage.getData());
-            }
+            JSONObject data = new JSONObject(remoteMessage.getData());
 
-            // Check if message contains a notification payload.
-            if (remoteMessage.getNotification() != null) {
-                title = remoteMessage.getNotification().getTitle(); //get title
-                message = remoteMessage.getNotification().getBody();
-                bg_image = remoteMessage.getNotification().getIcon();
-                click_action = remoteMessage.getNotification().getClickAction(); //get click_action
-                    bg_bitmap = getBitmapfromUrl(bg_image);
+            Log.w(TAG, "data " + data.toString());
+        }
 
-                Log.d(TAG, "Notification Title: " + title);
-                Log.d(TAG, "Notification Body: " + message);
-                Log.d(TAG, "URI " + imagepath);
-                Log.d(TAG, "Notification click_action: " + click_action);
 
-                sendNotification(title, message,click_action,bg_bitmap);
-            }
-            if (remoteMessage.getData() != null){
-                    title = remoteMessage.getData().get("title"); //get title
-                    message = remoteMessage.getData().get("message");
-                    imagepath = remoteMessage.getData().get("image_path");
-                    audio = remoteMessage.getData().get("audio");
-                    click_action = remoteMessage.getNotification().getClickAction(); //get click_action
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            Log.w(TAG,"on get notifictiom inside");
+            Log.w(TAG, "notification data 1 " + remoteMessage.getNotification().getBodyLocalizationKey());
+            title = remoteMessage.getNotification().getTitle(); //get title
+            message = remoteMessage.getNotification().getBody();
+            bg_image = remoteMessage.getNotification().getIcon();
+            click_action = remoteMessage.getNotification().getClickAction(); //get click_action
+            bg_bitmap = getBitmapfromUrl(bg_image);
 
-                    bitmap = getBitmapfromUrl(imagepath);
 
-                    sendNotificationData(title, message,click_action,bitmap,audio);
+            Log.w(TAG, "Notification Title: " + title);
+            Log.w(TAG, "Notification Body: " + message);
+            Log.w(TAG, "URI " + imagepath);
+            Log.w(TAG, "Notification click_action: " + click_action);
+            Log.w(TAG, "audio " + audio);
 
-            }
+            sendNotification(title, message, click_action, bg_bitmap);
+        }else{
+            Log.w(TAG,"on get notifictiom else");
+        }
+        if (remoteMessage.getData() != null) {
+            title = remoteMessage.getData().get("title"); //get title
+            message = remoteMessage.getData().get("message");
+            imagepath = remoteMessage.getData().get("image_path");
+            audio = remoteMessage.getData().get("audio");
+            click_action = remoteMessage.getNotification().getClickAction(); //get click_action
+
+            Log.w(TAG, "audio " + audio);
+
+            bitmap = getBitmapfromUrl(imagepath);
+
+            sendNotificationData(title, message, click_action, bitmap, audio);
+
+        }
     }
 
     private void sendNotificationData(String title, String message, String click_action, Bitmap bitmap, String audio) {
         Intent intent = new Intent(this, Dashboard.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        Bundle bundle = new Bundle();
+        bundle.putString("type", "song");
+        bundle.putString("data", audio);
+        intent.putExtras(bundle);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.logo)
@@ -135,29 +152,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private void sendNotification(String title, String messageBody, String click_action, Bitmap imagepath) {
 
-            Intent intent = new Intent(this, Dashboard.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(this, Dashboard.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.mipmap.logo)
-                    .setContentTitle(title)
-                    .setContentText(messageBody)
-                    .setStyle(new NotificationCompat.BigPictureStyle()
-                            .bigPicture(imagepath))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent)// Set the intent that will fire when the user taps the notification
-                    .setAutoCancel(true);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.logo)
+                .setContentTitle(title)
+                .setContentText(messageBody)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(imagepath))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)// Set the intent that will fire when the user taps the notification
+                .setAutoCancel(true);
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-            // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(notification_id, mBuilder.build());
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(notification_id, mBuilder.build());
 
-            createNotificationChannel();
+        createNotificationChannel();
 
     }
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
