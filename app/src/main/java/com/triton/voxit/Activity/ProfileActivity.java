@@ -324,7 +324,7 @@ public class ProfileActivity extends NavigationDrawer implements View.OnClickLis
                     if (checkCameraPermissions()) {
                         if (getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
 
-                            File file = new File(Environment.getExternalStorageDirectory(), "Voxit" + System.currentTimeMillis() + ".png");
+                            File file = new File(Environment.getExternalStorageDirectory(), "Nanny" + System.currentTimeMillis() + ".png");
                             profile_image_uri = Uri.fromFile(file);
 
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

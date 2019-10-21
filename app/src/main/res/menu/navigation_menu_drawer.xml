@@ -6,10 +6,6 @@
     <item android:id="@+id/nav_item_two"
         android:icon="@drawable/referral"
         android:title="Referrals" />
-    <item android:id="@+id/nav_item_genre"
-        android:icon="@drawable/referral"
-        android:title="Genre" />
-
     <item android:id="@+id/nav_item_three"
         android:icon="@drawable/help_support"
         android:title="Help and Support" />

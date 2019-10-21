@@ -146,7 +146,7 @@ public class TopGenreAdapter extends RecyclerView.Adapter<TopGenreAdapter.FoodIt
 
                             } else if (mps.getMediaPlayerStatus().equalsIgnoreCase("pause") || mps.getMediaPlayerStatus().equalsIgnoreCase("playing")) {
                                 if (mps.getType().equalsIgnoreCase("TopGenre") || mps.getType().equalsIgnoreCase("Trending")) {
-                                    Log.e("TopGenre-----", "if TopGenre");
+                                    Log.e("TopGenre-----", generType);
                                     activity.playSong("TopGenre", recyclerViewItem.getAudio_path(), recyclerViewItem.getName(), recyclerViewItem.getImage_path(), recyclerViewItem.getTitle(), position, generType, recyclerViewItem.getAudio_id());
                                 } else {
                                     Log.e("TopGenre-----", "else TopGenre");

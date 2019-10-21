@@ -90,7 +90,7 @@ public class SplashScreen extends Activity {
             finish();
         }else if(isLogged == true){
             startActivity(new Intent(this, Dashboard.class)
-                    .putExtra("login","O").setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+                    .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
             finish();
         }
 
