@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.triton.voxit.Activity.AudioActivity;
+import com.triton.voxit.Activity.NotificationActivity;
 import com.triton.voxit.R;
 import com.triton.voxit.SessionManager.SessionManager;
 import com.triton.voxit.Utlity.MediaPlayerSingleton;
@@ -30,11 +31,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     private boolean isCheck = true;
     SessionManager session;
     private MediaPlayerSingleton mps;
+    private NotificationActivity activity;
 
-    public NotificationAdapter(Context context, ArrayList<NotifyDataList> notifyList) {
+    public NotificationAdapter(Context context, ArrayList<NotifyDataList> notifyList, NotificationActivity activity) {
         this.mContext = context;
         this.listData = notifyList;
         mps = MediaPlayerSingleton.getInstance(context);
+        this.activity = activity;
     }
 
     @NonNull
@@ -51,8 +54,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         final NotifyDataList data = listData.get(i);
         final AudioDetailData audioData = data.getAudioDetail();
 
+        final int pos = i;
+
         holder.titleTv.setText(data.getTitle());
-        holder.dateTv.setText(data.getCreate_date()+","+"\t"+data.getCreate_time());
+        holder.dateTv.setText(data.getCreate_date() + "," + "\t" + data.getCreate_time());
         holder.msgTv.setText(data.getDescription());
         holder.msgTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,39 +74,47 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 //        holder.readTV.setText("Unread Message");
 
-        if (data.getImages() != null){
+        if (data.getImages() != null) {
             holder.image_ll.setVisibility(View.VISIBLE);
             Glide.with(mContext).load(data.getImages()).into(holder.image_noti);
-        }else{
+        } else {
             holder.image_ll.setVisibility(View.GONE);
         }
 
         final String jockeyid = String.valueOf(data.getAudioDetail().getJockey_id());
         final String audioid = String.valueOf(data.getAudioDetail().getAudio_id());
 
-            holder.notifyLt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        holder.notifyLt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if ((mps.getMediaPlayerStatus().equalsIgnoreCase("playing") || mps.getMediaPlayerStatus().equalsIgnoreCase("pause")) && mps.getType().equalsIgnoreCase("Notify")) {
+
+                    activity.playSong("Notify", audioData.getAudio_path(), audioData.getName(),
+                            audioData.getImage_path(), audioData.getTitle(), pos, "empty", audioData.getAudio_id() + "", audioData.getJockey_id() + "");
+
+                } else {
                     holder.readTV.setText("");
                     // ShowDialogueMethod("Alert",data.getType());
-                   holder.readTV.setText("");
-                   Log.i("TESTA",""+data.getType().equals("audio")+ data.getType().equals("all"));
-                 /*  if (data.getType().equals("audio") || data.getType().equals("all")){
-                        Intent intent= new Intent(mContext, AudioActivity.class);
-                       intent.putExtra("jockey_id", jockeyid);
-                       intent.putExtra("song", data.getAudioDetail().getAudio_path());
+                    holder.readTV.setText("");
+                    Log.i("TESTA", "" + data.getType().equals("audio") + data.getType().equals("all"));
+                    if (data.getType().equals("audio") || data.getType().equals("all")) {
+                        Intent intent = new Intent(mContext, AudioActivity.class);
+                        intent.putExtra("jockey_id", jockeyid);
+                        intent.putExtra("song", data.getAudioDetail().getAudio_path());
                         intent.putExtra("title", data.getAudioDetail().getTitle());
-                       intent.putExtra("description", data.getAudioDetail().getDiscription());
-                       intent.putExtra("image", data.getAudioDetail().getImage_path());
+                        intent.putExtra("description", data.getAudioDetail().getDiscription());
+                        intent.putExtra("image", data.getAudioDetail().getImage_path());
                         intent.putExtra("name", data.getAudioDetail().getName());
                         intent.putExtra("audio_length", data.getAudioDetail().getAudio_length());
                         intent.putExtra("audio_id", audioid);
                         intent.putExtra("type", "Notify");
-                        intent .putExtra("songsList", listData);
-                       mContext.startActivity(intent);
-                    }*/
+                        intent.putExtra("songsList", listData);
+                        mContext.startActivity(intent);
+                    }
                 }
-            });
+            }
+        });
 
     }
 
@@ -137,7 +150,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView image_noti;
-        public TextView titleTv, msgTv,dateTv,readTV;
+        public TextView titleTv, msgTv, dateTv, readTV;
         public LinearLayout notifyLt;
         public LinearLayout image_ll;
 
