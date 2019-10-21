@@ -1,6 +1,7 @@
 package com.triton.voxit.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,16 +10,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.triton.voxit.Activity.AudioActivity;
+import com.triton.voxit.Activity.Dashboard;
+import com.triton.voxit.Activity.QuizQuestionsActivity;
 import com.triton.voxit.R;
 import com.triton.voxit.listeners.OnLoadMoreListener;
+import com.triton.voxit.model.AudioDetailsResponseBean;
+import com.triton.voxit.model.EventBean;
+import com.triton.voxit.model.ResponseBean;
+import com.triton.voxit.model.TopThreePerformers;
+import com.triton.voxit.model.TopThreeRequest;
 import com.triton.voxit.responsepojo.VCornerQuestionsResponse;
 
 
-
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,11 +41,11 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     private static final int TYPE_LOADING = 5;
     private static final String TAG = "InboxItemAdapter";
 
-    private List<VCornerQuestionsResponse.ResponseBean> responseBeanList = null;
+    private ArrayList<ResponseBean> responseBeanArrayList = null;
+    private  ArrayList<VCornerQuestionsResponse> eventBeanList ;
     private Context context;
 
 
-    ArrayList<VCornerQuestionsResponse.ResponseBean> arrayList = null;
 
     private OnLoadMoreListener mOnLoadMoreListener;
 
@@ -43,16 +53,17 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     private boolean isLoading;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
-    VCornerQuestionsResponse.ResponseBean currentItem;
+    ResponseBean currentItem;
 
     Long elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds;
     String strMSgdaystime;
     String strMsg;
+    String EventType;
 
 
 
-    public VcornerDashboardAdapter(Context context,  List<VCornerQuestionsResponse.ResponseBean> nodesBeanList, RecyclerView inbox_list) {
-        this.responseBeanList = nodesBeanList;
+    public VcornerDashboardAdapter(Context context, ArrayList<ResponseBean> nodesBeanList, RecyclerView inbox_list) {
+        this.responseBeanArrayList = nodesBeanList;
         this.context = context;
 
         final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) inbox_list.getLayoutManager();
@@ -98,16 +109,20 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         initLayoutOne((ViewHolderOne) holder, position);
+
+
     }
 
     private void initLayoutOne(ViewHolderOne holder, int position) {
 
-
-        currentItem = responseBeanList.get(position);
-        for (int i = 0; i < responseBeanList.size(); i++) {
-            holder.txt_eventtype.setText(currentItem.getEventType());
-            String startDate = currentItem.getStartDate()+" "+currentItem.getStartTime();
-            String endDate = currentItem.getEndDate()+" "+currentItem.getEndTime();
+        currentItem = responseBeanArrayList.get(position);
+        //QuizQuestionsActivity.responseBean = responseBeanList.get(position);
+        for (int i = 0; i < responseBeanArrayList.size(); i++) {
+            // EventType = currentItem.getEventType();
+            holder.txt_eventtype.setText(currentItem.getEventName());
+            holder.txt_endsin.setText("Ends in:"+currentItem.getEnds());
+            String startDate = currentItem.getStarts();
+            String endDate = currentItem.getEnds();
             getCalculateTimes(endDate);
 
              if(checkCurrentDateTimeAndEndDateTime(endDate)){
@@ -117,10 +132,23 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
                  Log.i("startDate",startDate);
                  Toast.makeText(context, "Selected row!"+startDate,
                          Toast.LENGTH_LONG).show();
-                 holder.txt_endsin.setText(strMsg+" "+strMSgdaystime+" "+elapsedHours+":"+elapsedMinutes+":"+elapsedSeconds);
+               // holder.txt_endsin.setText(strMsg+" "+strMSgdaystime+" "+elapsedHours+":"+elapsedMinutes+":"+elapsedSeconds);
 
              }
             Log.i("STARTEND","Start"+startDate+"End"+endDate  );
+
+
+             holder.ivNext.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     String eventType= responseBeanArrayList.get(position).getEventType();
+                     Intent in = new Intent(context,QuizQuestionsActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                     in.putExtra("EVENTSBEAN",responseBeanArrayList);
+                     in.putExtra("EVENT",eventType);
+                     context.startActivity(in);
+
+                 }
+             });
 
 
 
@@ -189,10 +217,10 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     }
     private void getCalculateTimes(String endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
 
         try {
-            Date date1 =getCurrentDateandTime();
+            Date date1 = getCurrentDateandTime();
             Date date2 = simpleDateFormat.parse(endDate);
             calculateDuration(date1,date2);
             Log.i("STARTEND1","Start"+date1+"End"+date2);
@@ -233,7 +261,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
 
     @Override
     public int getItemCount() {
-        return responseBeanList.size();
+        return responseBeanArrayList.size();
     }
     public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
         this.mOnLoadMoreListener = mOnLoadMoreListener;
@@ -247,6 +275,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
     class ViewHolderOne extends RecyclerView.ViewHolder {
         public TextView txt_eventtype, txt_endsin;
         public LinearLayout llroot;
+        public ImageView ivNext;
 
         public ViewHolderOne(View itemView) {
             super(itemView);
@@ -254,7 +283,7 @@ public class VcornerDashboardAdapter extends  RecyclerView.Adapter<RecyclerView.
             txt_eventtype = (TextView) itemView.findViewById(R.id.tveventtype);
             txt_endsin = (TextView) itemView.findViewById(R.id.tvendins);
             llroot = (LinearLayout)itemView.findViewById(R.id.llrootcard);
-
+            ivNext = (ImageView)itemView.findViewById(R.id.ivnext);
 
 
 

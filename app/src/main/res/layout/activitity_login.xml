@@ -43,7 +43,7 @@
             android:paddingLeft="@dimen/normal_margin_value10"
             android:paddingRight="@dimen/normal_margin_value10"
             android:paddingBottom="@dimen/normal_margin_value10"
-            android:layout_marginTop="@dimen/mbig_margin_value"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
             <!--<android.support.design.widget.TextInputLayout-->
             <!--android:id="@+id/user_name_layout"-->
@@ -242,6 +242,7 @@
 
         </LinearLayout>
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/normal_margin_value10"

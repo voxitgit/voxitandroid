@@ -10,6 +10,8 @@ android {
         versionCode 15
         versionName "2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -22,6 +24,10 @@ android {
         repositories {
             mavenCentral()
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
