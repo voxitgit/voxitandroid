@@ -60,6 +60,7 @@ import com.triton.voxit.Service.MediaPlayerService;
 import com.triton.voxit.SessionManager.SessionManager;
 import com.triton.voxit.Utlity.MediaPlayerSingleton;
 import com.triton.voxit.app.App;
+import com.triton.voxit.model.AudioDetailData;
 import com.triton.voxit.model.AudioDetailsResponseBean;
 import com.triton.voxit.model.AudioListData;
 import com.triton.voxit.model.BannerResponseBean;
@@ -77,6 +78,7 @@ import com.triton.voxit.model.TopGenreResponseBean;
 import com.triton.voxit.model.TrendingResponseBean;
 import com.triton.voxit.model.UserLogResponse;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -141,7 +143,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
     private TextView txtSongName, txtAuthorName, txtTypeName;
 
     private BroadcastReceiver myReceiver;
-    ArrayList<AudioListData> audioListData;
+    ArrayList<AudioListData> audioListData = new ArrayList<>();
     private ArrayList<SearchData> searchDataResponse;
     private ArrayList<AudioDetailsResponseBean> TopListgenreResponse;
     boolean loginStatus;
@@ -183,9 +185,32 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                             Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
+
+        mps = MediaPlayerSingleton.getInstance(this);
+
+
+        if (getIntent().getExtras() != null) {
+
+            try {
+
+                String value = getIntent().getExtras().getString("audio");
+
+                Log.w(TAG, "value " + value);
+
+                // String audio = getIntent().getExtras().getString("audio");
+                if (value != null) {
+                    playSongFromNotification(value);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
         GPSTracker gps = new GPSTracker(this);
-         latitude = gps.getLatitude();
-         longitude = gps.getLongitude();
+        latitude = gps.getLatitude();
+        longitude = gps.getLongitude();
         Log.e("lat", String.valueOf(latitude));
         Log.e("long", String.valueOf(longitude));
 //        Log.e("token", token);
@@ -207,17 +232,60 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
 //            if (flag.equals("BV")){
 //
 //            }else{
-                getPopupImage();
+            getPopupImage();
 //            }
             type = "in";
             sendUserLogAPI(type);
             dataIntegration();
         }
-        mps = MediaPlayerSingleton.getInstance(this);
+
 
         registerReceiver();
 
     }//end of oncreate
+
+
+    private void playSongFromNotification(String audio) {
+        try {
+            JSONArray array = new JSONArray(audio);
+            JSONObject obj = array.getJSONObject(0);
+            String description = obj.getString("discription");
+            int jockeyId = obj.getInt("jockey_id");
+            String title = obj.getString("title");
+            String audioId = obj.getString("audio_id");
+            String image = obj.getString("image_path");
+            String name = obj.getString("name");
+            String audioPath = obj.getString("audio_path");
+
+
+            playSong("Notification", audioPath, name, image, title, 0, "empty", audioId);
+            setCompleteListener();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.w(TAG, "on new intent called ");
+
+        try {
+            if (intent.getExtras() != null) {
+                String type = intent.getExtras().getString("type");
+                if (type.equalsIgnoreCase("song")) {
+                    String audio = intent.getExtras().getString("data");
+
+                    playSongFromNotification(audio);
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private void sendUserLogAPI(String type) {
         Integer id = Integer.valueOf(jockey_id);
@@ -227,7 +295,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
             json.put("jockey_id", id);
             json.put("type", type);
             Log.e("LogggggggAPI", String.valueOf(json));
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("Exception ", e.toString());
         }
 
@@ -241,7 +309,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
             @Override
             public void onResponse(Call<UserLogResponse> call, Response<UserLogResponse> response) {
                 UserLogResponse recourse = response.body();
-                if (recourse != null){
+                if (recourse != null) {
 
                 }
             }
@@ -311,8 +379,8 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
 
 
     public void playSong(String type, String audioUrl, String authorName, String imageUrl, String title, int songIndex,
-                          String subType, String audioid) {
-        Log.e("Type", audioid);
+                         String subType, String audioid) {
+        Log.e(TAG, "sub type " + subType);
         APIrecent(audioid);
         try {
             setType(type);
@@ -426,24 +494,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
             });
 //                Log.w("Duartion ", duration + "");
 
-            mps.mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    // imgMiniPlay.setImageResource(R.drawable.play_blue);
 
-                    if (mps.mp != null) {
-                        setStatus("completed");
-                        imgMiniPlay.setImageResource(R.drawable.pause_blue);
-                        // playMethod(songIndex + 1);
-
-                        //  playNextSong();
-
-
-                    }
-
-
-                }
-            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -468,7 +519,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
             json.put("jockey_id", id);
             json.put("audio_id", au_id);
             Log.e("testtttt", String.valueOf(json));
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("Exception ", e.toString());
         }
 
@@ -483,7 +534,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
             public void onResponse(Call<RecentlyPlayedResponse> call, Response<RecentlyPlayedResponse> response) {
 
                 recentlyPlayedResponse = response.body();
-                if (recentlyPlayedResponse != null){
+                if (recentlyPlayedResponse != null) {
                     Log.e("audio_recent", recentlyPlayedResponse.getStatus());
                 }
             }
@@ -554,41 +605,41 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                 Log.e("response code", String.valueOf(response.code()));
                 //Log.e("response", String.valueOf(resource));
 
-                if(response.body() != null){
-                if (response.body().getStatus().equals("Success")) {
-                    GetPopupDataRequestdata = response.body();
-                    imageList = GetPopupDataRequestdata.getResponse();
+                if (response.body() != null) {
+                    if (response.body().getStatus().equals("Success")) {
+                        GetPopupDataRequestdata = response.body();
+                        imageList = GetPopupDataRequestdata.getResponse();
 //                     loginStatus = response.body().getResponse().get(0).isLoginStatus();
-                    Log.e("loginStatus", String.valueOf(loginStatus));
-                    // popupLoginCheck();
-                    if (session.isLoggedIn()) {
-                        for (int i = 0; i < imageList.size(); i++) {
-                            Boolean Login = imageList.get(i).isLoginStatus();
-                            if (Login) {
-                                popup_image_path = imageList.get(i).getImage_path();
-                                if (imageList.get(i).isOpen()){
-                                    popupDialogMethod(popup_image_path);
-                                }
+                        Log.e("loginStatus", String.valueOf(loginStatus));
+                        // popupLoginCheck();
+                        if (session.isLoggedIn()) {
+                            for (int i = 0; i < imageList.size(); i++) {
+                                Boolean Login = imageList.get(i).isLoginStatus();
+                                if (Login) {
+                                    popup_image_path = imageList.get(i).getImage_path();
+                                    if (imageList.get(i).isOpen()) {
+                                        popupDialogMethod(popup_image_path);
+                                    }
 
+                                }
+                            }
+
+                        } else if (!session.isLoggedIn()) {
+                            for (int i = 0; i < imageList.size(); i++) {
+                                Boolean Login = imageList.get(i).isLoginStatus();
+                                if (!Login) {
+                                    popup_image_path = imageList.get(i).getImage_path();
+                                    if (imageList.get(i).isOpen()) {
+                                        popupDialogMethod(popup_image_path);
+                                    }
+                                }
                             }
                         }
 
-                    } else if (!session.isLoggedIn()) {
-                        for (int i = 0; i < imageList.size(); i++) {
-                            Boolean Login = imageList.get(i).isLoginStatus();
-                            if (!Login) {
-                                popup_image_path = imageList.get(i).getImage_path();
-                                if (imageList.get(i).isOpen()) {
-                                    popupDialogMethod(popup_image_path);
-                                }
-                            }
-                        }
+                    } else {
+
                     }
-
-                } else {
-
                 }
-            }
             }
 
             @Override
@@ -693,13 +744,13 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                 .setOnKeyListener(new DialogInterface.OnKeyListener() {
                     @Override
                     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP)
+                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP)
                             finish();
                         return false;
                     }
                 });
 
-         dialog = alert.create();
+        dialog = alert.create();
 
         dialog.setCanceledOnTouchOutside(false);
 
@@ -738,7 +789,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                 .setOnKeyListener(new DialogInterface.OnKeyListener() {
                     @Override
                     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                        if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP)
+                        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP)
                             finish();
                         return false;
                     }
@@ -784,8 +835,8 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
 
                 NotificationToken resource = response.body();
                 Log.e("update status", String.valueOf(resource));
-                if (resource != null){
-                    if (resource.getMust()){
+                if (resource != null) {
+                    if (resource.getMust()) {
                         VersionDialogMethod();
                     }
                 }
@@ -945,6 +996,213 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
 //        comedy_recycler_view.setAdapter(new TopGenreMultiListAdapter(LIST,this,flag));
 //    }
 
+
+    private void clearMiniPLayer() {
+        miniPlayerLayout.setVisibility(View.GONE);
+        clearMediaPLayer();
+        clearNotification();
+    }
+
+    private void clearMediaPLayer() {
+        mps.releasePlayer();
+        mps.setType("empty");
+        mps.setMediaPlayerStatus("empty");
+        mps.setSubType("empty");
+        mps.setAuthorName("empty");
+        setStatus("empty");
+    }
+
+    ArrayList<AudioDetailsResponseBean> list = new ArrayList<>();
+    String subType;
+
+    private int findCurrentPlayPos() {
+
+        int pos = mps.getCurrentPlayPos();
+        String type = mps.getType();
+        switch (type) {
+            case "Trending":
+                for (int i = 0; i <= trendingResponse.size() - 1; i++) {
+                    TrendingResponseBean model = trendingResponse.get(i);
+                    if (model.getAudio_path().equalsIgnoreCase(mps.getFileName())) {
+                        pos = i;
+                        break;
+                    }
+                }
+
+                break;
+            case "JockeyList":
+                audioListData = mps.getJockeyListData();
+                for (int i = 0; i <= audioListData.size() - 1; i++) {
+                    AudioListData model = audioListData.get(i);
+                    if (model.getAudio_path().equalsIgnoreCase(mps.getFileName())) {
+                        pos = i;
+                        break;
+                    }
+                }
+
+                break;
+            case "Search":
+
+
+                for (int i = 0; i <= mps.getSearchList().size() - 1; i++) {
+                    SearchData model = mps.getSearchList().get(i);
+                    if (model.getAudio_path().equalsIgnoreCase(mps.getFileName())) {
+                        pos = i;
+                        break;
+                    }
+                }
+                break;
+
+            case "TopGenre":
+
+
+                for (int i = 0; i <= topgenreResponse.size() - 1; i++) {
+
+                    Log.w(TAG, "subType " + mps.getSubType());
+
+                    if (topgenreResponse.get(i).getGenre().equalsIgnoreCase(mps.getSubType())) {
+                        list = topgenreResponse.get(i).getAudiodetails();
+                        subType = topgenreResponse.get(i).getGenre();
+                        break;
+                    }
+                }
+
+                for (int i = 0; i <= list.size() - 1; i++) {
+                    AudioDetailsResponseBean data = list.get(i);
+
+                    if (data.getAudio_path().equalsIgnoreCase(mps.getFileName())) {
+                        pos = i;
+                        break;
+                    }
+                }
+                break;
+
+
+        }
+
+        return pos;
+    }
+
+    private void playNextSong() {
+
+        String type = mps.getType();
+        switch (type) {
+            case "Trending":
+                if (mps.getCurrentPlayPos() != -1) {
+                    int pos = findCurrentPlayPos();
+                    if ((pos + 1) < trendingResponse.size()) {
+                        try {
+                            pos += 1;
+                            TrendingResponseBean model = trendingResponse.get(pos);
+                            playSong("Trending", model.getAudio_path(), model.getName(), model.getImage_path(), model.getTitle(), pos, "empty", model.getAudio_id());
+                        } catch (IndexOutOfBoundsException e) {
+                            clearMiniPLayer();
+                        }
+
+                    } else {
+                        clearMiniPLayer();
+                    }
+
+                }
+
+                break;
+            case "JockeyList":
+
+                if (mps.getCurrentPlayPos() != -1) {
+                    int pos = findCurrentPlayPos();
+                    if ((pos + 1) < audioListData.size()) {
+
+                        try {
+                            pos += 1;
+                            AudioListData model = audioListData.get(pos);
+                            playSong("JockeyList", model.getAudio_path(), model.getName(), model.getImage_path(), model.getTitle(), pos, "empty", model.getAudio_id() + "");
+
+                        } catch (IndexOutOfBoundsException e) {
+
+                        }
+                    } else {
+                        clearMiniPLayer();
+                    }
+                }
+
+                break;
+            case "Search":
+
+                if (mps.getCurrentPlayPos() != -1) {
+                    int pos = findCurrentPlayPos();
+
+                    if ((pos + 1) < mps.getSearchList().size()) {
+
+                        try {
+                            pos += 1;
+                            SearchData model = mps.getSearchList().get(pos);
+                            playSong("Search", model.getAudio_path(), model.getName(), model.getImage_path(), model.getTitle(), pos, "empty", model.getAudio_id() + "");
+
+                        } catch (IndexOutOfBoundsException e) {
+                            clearMiniPLayer();
+                        }
+                    } else {
+                        clearMiniPLayer();
+                    }
+
+                }
+
+                break;
+
+            case "TopGenre":
+
+                if (mps.getCurrentPlayPos() != -1) {
+                    int pos = findCurrentPlayPos();
+
+                    if ((pos + 1) < list.size()) {
+                        pos += 1;
+                        try {
+                            AudioDetailsResponseBean model = list.get(pos);
+                            Log.w(TAG, "sub type " + subType);
+                            playSong("TopGenre", model.getAudio_path(), model.getName(), model.getImage_path(), model.getTitle(), pos, subType, model.getAudio_id() + "");
+                        } catch (IndexOutOfBoundsException e) {
+                            clearMiniPLayer();
+                        }
+
+                    } else {
+                        clearMiniPLayer();
+                    }
+                }
+
+
+                break;
+
+            default:
+                clearMiniPLayer();
+
+        }
+    }
+
+    private void setCompleteListener() {
+        if (mps.mp != null) {
+            mps.mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    // imgMiniPlay.setImageResource(R.drawable.play_blue);
+
+                    if (mps.mp != null) {
+
+                        imgMiniPlay.setImageResource(R.drawable.ic_play);
+
+                        Log.w(TAG, "song completed");
+                        // playMethod(songIndex + 1);
+
+                        playNextSong();
+
+
+                    }
+
+
+                }
+            });
+        }
+    }
+
     private void initUI() {
         bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -979,19 +1237,19 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
         imgSong = (ImageView) findViewById(R.id.imgSong);
         txtAuthorName = (TextView) findViewById(R.id.txtAuthorName);
 
-        tv_Vcorner = (TextView)findViewById(R.id.tvVcorner);
+        tv_Vcorner = (TextView) findViewById(R.id.tvVcorner);
 
         tv_Vcorner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),VcornerActivity.class));
+                startActivity(new Intent(getApplicationContext(), VcornerActivity.class));
             }
         });
 
         imgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mps != null){
+                if (mps != null) {
                     mps.releasePlayer();
                 }
                 miniPlayerLayout.setVisibility(View.GONE);
@@ -1061,7 +1319,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                                         .putExtra("image", model.getImage_path())
                                         .putExtra("name", model.getName())
                                         .putExtra("audio_length", model.getAudio_length())
-                                        .putExtra("audio_id", model.getAudio_id())
+                                        .putExtra("audio_id", model.getAudio_id() + "")
                                         .putExtra("type", "JockeyList")
                                         .putExtra("songsList", audioListData)
                                         .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
@@ -1094,14 +1352,12 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                     case "TopGenre":
                         Log.w(TAG, "top genre");
                         if (mps.getCurrentPlayPos() != -1 && mps.getType().equals("TopGenre")) {
-
                             ArrayList<AudioDetailsResponseBean> list = new ArrayList<>();
-
-
                             for (int i = 0; i <= topgenreResponse.size() - 1; i++) {
 
                                 if (topgenreResponse.get(i).getGenre().equalsIgnoreCase(mps.getSubType())) {
                                     list = topgenreResponse.get(i).getAudiodetails();
+                                    subType = topgenreResponse.get(i).getGenre();
                                     break;
                                 }
                             }
@@ -1123,6 +1379,7 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
                                         .putExtra("audio_id", data.getAudio_id())
                                         .putExtra("type", "TopGenre")
                                         .putExtra("songsList", list)
+                                        .putExtra("subType", subType)
                                         .setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
                             }
 
@@ -1329,6 +1586,9 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
 
             }
 
+
+            setCompleteListener();
+
         }
 
         // mAdapter.setCanStart(true);
@@ -1337,7 +1597,6 @@ public class Dashboard extends NavigationDrawer implements View.OnClickListener 
     private void loadImageForMiniPlayer() {
         Glide.with(this).load(mps.getImageUrl()).into(imgSong);
     }
-
 
 
     @Override
