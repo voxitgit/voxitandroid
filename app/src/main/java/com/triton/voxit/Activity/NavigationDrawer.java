@@ -32,6 +32,7 @@ import com.triton.voxit.Api.APIInterface;
 import com.triton.voxit.R;
 import com.triton.voxit.SessionManager.SessionManager;
 import com.triton.voxit.model.AppliedJockeyResponse;
+import com.triton.voxit.model.Genre;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,6 +70,8 @@ public class NavigationDrawer extends AppCompatActivity implements View.OnClickL
     private AppliedJockeyResponse appliedJockeyResponse;
     ProgressDialog pDialog;
 
+    TextView tvWelcomeName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +105,6 @@ public class NavigationDrawer extends AppCompatActivity implements View.OnClickL
         //Initializing NavigationView
         navigationView = (NavigationView) view.findViewById(R.id.nav_view);
         frameLayout = (FrameLayout) view.findViewById(R.id.base_container);
-
         navigationView.setNavigationItemSelectedListener(this);
         Menu menu =navigationView.getMenu();
 
@@ -144,6 +146,9 @@ public class NavigationDrawer extends AppCompatActivity implements View.OnClickL
         languageLt = (LinearLayout)toolbar.findViewById(R.id.tvLanguage);
         genreLt = (LinearLayout)toolbar.findViewById(R.id.tvgenre);
         menuLt = (LinearLayout)toolbar.findViewById(R.id.menu);
+        tvWelcomeName = (TextView)toolbar.findViewById(R.id.tvWelcome);
+        tvWelcomeName.setText("Welcome !"+"\t"+"\t"+name);
+
         //drawerImg.setOnClickListener(this);
         toggleView();
     }
@@ -224,6 +229,10 @@ public class NavigationDrawer extends AppCompatActivity implements View.OnClickL
             // For rest of the options we just show a toast on click
             case R.id.nav_item_two:
                 gotoRefCode();
+                return true;
+
+            case R.id.nav_item_genre:
+                gotoGenre();
                 return true;
 
             case R.id.nav_item_three:
@@ -335,5 +344,11 @@ public class NavigationDrawer extends AppCompatActivity implements View.OnClickL
     private void gotoMyRewards() {
         Intent i = new Intent(this,MyRewardsActivity.class);
         startActivity(i);
+    }
+
+    private void gotoGenre(){
+        Intent i = new Intent(this, GenreActivity.class);
+        startActivity(i);
+
     }
 }
