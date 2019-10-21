@@ -236,15 +236,16 @@
                 android:layout_alignParentLeft="true"
                 android:id="@+id/btnPrevious"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="Previous"
                 android:textAllCaps="false"
-                android:drawableLeft="@drawable/previous_gray" />
+                android:background="@drawable/textview_bg"
+                android:drawableLeft="@drawable/drawable_left_previous" />
             <Button
                 android:layout_centerInParent="true"
                 android:id="@+id/btnSkip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:textAllCaps="false"
                 android:text="Skip"/>
 
@@ -253,18 +254,19 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/btnNext"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="Next"
+                android:background="@drawable/textview_bg"
                 android:textAllCaps="false"
                 android:drawableRight="@drawable/next_gray"/>
             <Button
                 android:layout_alignParentRight="true"
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="Submit"
+                android:background="@drawable/textview_bg_change"
                 android:textColor="@color/white"
-                android:background="@color/voxitcolor"
                 android:textAllCaps="false"
                 android:visibility="invisible"/>
 

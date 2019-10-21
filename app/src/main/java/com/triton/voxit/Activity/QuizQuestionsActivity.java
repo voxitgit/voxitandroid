@@ -133,10 +133,6 @@ private TextView tvQuestions,tvAns1,tvAns2,tvAns3,tvAns4;
         tvQuestions = (TextView)findViewById(R.id.tvquestions);
         tvAns1 = (TextView)findViewById(R.id.tvAns1);
         tvAns2 = (TextView)findViewById(R.id.tvAns2);
-
-
-
-
         tvAns3 = (TextView)findViewById(R.id.tvAns3);
         tvAns4 = (TextView)findViewById(R.id.tvAns4);
         btnNext = (Button)findViewById(R.id.btnNext);
